@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        HOMEPAGE
+        <br><br>
+        {{#if logged}}
+            <a href="/auth/logout">SAIR</a>
+        {{else}}
+            <a href="/auth/login">ENTRE AGORA MESMO</a>
+        {{/if}}
+    </body>
+</html>

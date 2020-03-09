@@ -1,0 +1,10 @@
+#subject-info {
+    margin-top: 3rem;
+    border: 1px solid black;
+    width: 60%;
+}
+
+#sub-info-table tbody tr td,
+#sub-info-table thead tr th {
+    padding: 0.5rem;
+}

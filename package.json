@@ -1,0 +1,23 @@
+{
+  "name": "eep_tcc",
+  "version": "1.0.0",
+  "description": "Tcc da faculdade.",
+  "main": "index.js",
+  "scripts": {
+    "start": "sudo node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leonardo Ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "mongodb": "^3.5.4",
+    "randomstring": "^1.1.5"
+  }
+}

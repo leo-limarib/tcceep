@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.teacher-signup,
+.student-signup,
+.coordinator-signup {
+    text-align: center;
+}
