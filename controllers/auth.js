@@ -13,3 +13,11 @@ exports.authTeacher = (req, res, next) => {
     } else return res.redirect("/");
   } else return res.redirect("/");
 };
+
+exports.authStudent = (req, res, next) => {
+  if (req.session.user != undefined) {
+    if (req.session.user["level"] == 1) {
+      return next();
+    } else return res.redirect("/");
+  } else return res.redirect("/");
+};

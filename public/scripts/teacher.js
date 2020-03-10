@@ -6,6 +6,7 @@ function showSubjectExercises(subjectId) {
     data: null,
     dataType: "json",
     success: exercises => {
+      $("#subject-exercises").empty();
       exercises.forEach(ex => {
         $("#subject-exercises").append(
           `<h3>${ex.name}</h3><p>${ex.question.replace(

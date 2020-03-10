@@ -23,6 +23,7 @@ app.set("views", path.resolve(__dirname, "views"));
 const auth = require("./routes/authentication");
 const coordinator = require("./routes/coordinator");
 const teacher = require("./routes/teacher");
+const student = require("./routes/student");
 
 //Parse url parameters and jsons
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,6 +47,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", auth);
 app.use("/coordinator", authController.authCoordinator, coordinator);
 app.use("/teacher", authController.authTeacher, teacher);
+app.use("/student", authController.authStudent, student);
 
 app.use("/", (req, res) => {
   return res.render("index", { layout: false, logged: req.session.isLoggedIn });
