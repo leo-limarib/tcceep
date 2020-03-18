@@ -1,3 +1,27 @@
+var exerciseSelected = null;
+
+function showExerciseToSolve(exerciseId) {
+  $("#solve-exercises").empty();
+  exerciseSelected = exerciseId;
+  $.ajax({
+    type: "GET",
+    url: window.location + `/exercises/solve/${exerciseId}`,
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: exercise => {
+      $("#solve-exercises").append(
+        `<h2>${exercise.name}</h2><p>${exercise.teacher}</p>` +
+          `<p>${exercise.subject}</p><br>` +
+          `<p>${exercise.question}</p>` +
+          `<p>${exercise.languages}</p>` +
+          `<input type="file" name="code-input" placeholder="Código" id="code-input">` +
+          `<button onclick="solveExercise()" accept=".py">Submeter</button>`
+      );
+    }
+  });
+}
+
 function showSubjectExercises(subjectId) {
   $("#exercises").empty();
   $.ajax({
@@ -11,7 +35,7 @@ function showSubjectExercises(subjectId) {
         $("#exercises").append(
           `<div class="exercise-card"><h4>${ex.name}` +
             `</h4><p>${ex.question}</p>` +
-            `<a href="/">Resolver exercício</a></div>`
+            `<a onclick="showExerciseToSolve('${ex._id}')" >Resolver exercício</a></div>`
         );
       });
     }

@@ -11,4 +11,9 @@ router.get("/subjects", subjectsController.getStudentSubjects);
 
 router.get("/exercises/:subjectId", exercisesController.getSubjectExercises);
 
+router.get(
+  "/exercises/solve/:exerciseId",
+  exercisesController.getExerciseToSolve
+);
+
 module.exports = router;

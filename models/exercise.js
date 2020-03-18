@@ -40,6 +40,20 @@ class Exercise {
         });
     });
   }
+
+  static findOne(filter) {
+    const db = getDb();
+    return new Promise((resolve, reject) => {
+      db.collection(COLLECTION_NAME)
+        .findOne(filter)
+        .then(exercise => {
+          resolve(exercise);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }
 
 module.exports = Exercise;
