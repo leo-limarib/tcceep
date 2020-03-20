@@ -2,8 +2,10 @@ const User = require("../models/user");
 const Subject = require("../models/subject");
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
-require("dotenv").config();
 const randstr = require("randomstring");
+const fs = require("fs");
+const path = require("path");
+require("dotenv").config();
 
 exports.checkDuplicate = (req, res, next) => {
   User.findOne({ email: req.body.email })
@@ -40,7 +42,19 @@ exports.createUser = (req, res, next) => {
         .save()
         .then(() => {
           res.locals.user = user;
-          return next();
+          return fs.mkdir(
+            path.join(__dirname, "..", "uploads", user.email),
+            err => {
+              if (err) {
+                console.log(err);
+                return res
+                  .status(500)
+                  .json({ message: "Erro ao tentar adicionar usuário." });
+              } else {
+                return next();
+              }
+            }
+          );
         })
         .catch(err => {
           console.log(err);
@@ -74,7 +88,21 @@ exports.createTeacher = (req, res) => {
       teacher
         .save()
         .then(() => {
-          return res.json({ message: "Professor adicionado com sucesso." });
+          return fs.mkdir(
+            path.join(__dirname, "..", "uploads", teacher.email),
+            err => {
+              if (err) {
+                console.log(err);
+                return res
+                  .status(500)
+                  .json({ message: "Erro ao tentar adicionar usuário." });
+              } else {
+                return res.json({
+                  message: "Professor adicionado com sucesso."
+                });
+              }
+            }
+          );
         })
         .catch(err => {
           console.log(err);
@@ -105,7 +133,19 @@ exports.createStudent = (req, res) => {
       student
         .save()
         .then(() => {
-          return res.json({ message: "Aluno adicionado com sucesso." });
+          return fs.mkdir(
+            path.join(__dirname, "..", "uploads", student.email),
+            err => {
+              if (err) {
+                console.log(err);
+                return res
+                  .status(500)
+                  .json({ message: "Erro ao tentar adicionar usuário." });
+              } else {
+                return res.json({ message: "Aluno adicionado com sucesso." });
+              }
+            }
+          );
         })
         .catch(err => {
           console.log(err);

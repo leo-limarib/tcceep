@@ -14,10 +14,13 @@ function showExerciseToSolve(exerciseId) {
         `<h2>${exercise.name}</h2><p>${exercise.teacher}</p>` +
           `<p>${exercise.subject}</p><br>` +
           `<p>${exercise.question}</p>` +
-          `<p>${exercise.languages}</p>` +
-          `<input type="file" name="code-input" placeholder="Código" id="code-input">` +
-          `<button onclick="solveExercise()" accept=".py">Submeter</button>`
+          `<form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data"><select id="language"></select><br><br>` +
+          `<input type="file" name="input_file" placeholder="Código" id="code-input" accept=".py">` +
+          `<button type="submit">Submeter</button></form>`
       );
+      exercise.languages.forEach(lang => {
+        $("#language").append(`<option value="${lang}">${lang}</option>`);
+      });
     }
   });
 }

@@ -16,4 +16,6 @@ router.get(
   exercisesController.getExerciseToSolve
 );
 
+router.post("/exercises/solve/:exerciseId", exercisesController.solveExercise);
+
 module.exports = router;

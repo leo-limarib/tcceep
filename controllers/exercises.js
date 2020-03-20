@@ -2,6 +2,8 @@ const Exercise = require("../models/exercise");
 const User = require("../models/user");
 const Subject = require("../models/subject");
 const ObjectID = require("mongodb").ObjectID;
+const upload = require("../utils/upload");
+const { spawn } = require("child_process");
 
 function exerciseInfoFactory(exercise) {
   return new Promise((resolve, reject) => {
@@ -92,4 +94,45 @@ exports.getExerciseToSolve = (req, res) => {
         .status(500)
         .json({ message: "Erro ao tentar retornar exercício." });
     });
+};
+
+exports.solveExercise = (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar submeter exercício." });
+    }
+
+    //RUN TEST CASES
+    const codeProcess = spawn(`python3`, [
+      `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`
+    ]);
+
+    codeProcess.on("error", err => {
+      console.log(err);
+    });
+
+    codeProcess.stdout
+      .on("data", data => {
+        console.log(data);
+      })
+      .setEncoding("utf-8");
+
+    codeProcess.stderr.on("data", data => {
+      //Aqui teriamos que ir guardando as linhas
+      //para, no final, comparar os outputs com
+      //as respostas corretas.
+      console.log(data);
+    });
+
+    codeProcess.stdin.setDefaultEncoding("utf-8");
+
+    //Aqui seriam os test cases do db.
+    codeProcess.stdin.write("input1\n");
+    codeProcess.stdin.write("input2\n");
+    codeProcess.stdin.write("input3\n");
+    codeProcess.stdin.write("input4\n");
+    codeProcess.stdin.end();
+  });
 };
