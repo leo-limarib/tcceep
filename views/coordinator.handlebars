@@ -11,87 +11,175 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link rel="stylesheet" href="/css/coordinator.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
+    <script defer src="../fontawesome/js/all.js"></script>
 </head>
 
 <body>
-    <a href="/auth/logout">SAIR</a>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-4 left-div">
-                <h3>MATÉRIAS</h3>
-                <table id="subjects-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <br>
-                <br>
-                <div id="show-subject-info"></div>
-                <br>
-                <br>
-                <h4>Adicionar matéria:</h4>
-                <form action="/coordinator/add-subject" method="POST">
-                    <input type="text" name="name" placeholder="Nome" required="required">
-                    <br>
-                    <select name="teacherId" id="teacher-select">
-                        <option value="" disabled="disabled" selected="selected">Selecionar professor</option>
-                    </select>
-                    <br>
-                    <button type="submit">Adicionar</button>
-                </form>
+
+    <header style="float: left;">
+            <div id="menu-lateral">
+
+                <div id="foto-usuario">
+
+                    <div id="foto">
+                        <a href="">
+                            <span class="icone-foto" style="font-size: 2em; margin-left: 13px;"><i class="fas fa-camera"></i></span>
+                        </a>  
+                    </div>
+                    <span class="usuario">Nome Ilustrativo joao</span>
+                    <span style="clear: both;" class="facul">FUMEP</span>
+    
+                </div>
+
+                <div style="clear: both;"></div>
+                <h5>Coordenador</h5>
+
+                <button id="bt1" class="hoverJQuery" type="button" onclick="acionarMaterias()"><span class="icones-menu icone-fdp"><i class="fas fa-clipboard"></i></span>Matérias</button>
+                <button id="bt2" class="hoverJQuery" type="button" onclick="acionarProfessores()"><span class="icones-menu"><svg class="svg-inline--fa fa-chalkboard-teacher fa-w-20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chalkboard-teacher" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z"></path></svg></span>Professores</button>
+                <button id="bt3" class="hoverJQuery" type="button" onclick="acionarAlunos()"><span class="icones-menu"><i class="fas fa-users"></i></span>Alunos</button>
+                <button id="bt4" class="hoverJQuery" type="button"><span class="icones-menu"><svg class="svg-inline--fa fa-user-cog fa-w-20" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-cog" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M610.5 373.3c2.6-14.1 2.6-28.5 0-42.6l25.8-14.9c3-1.7 4.3-5.2 3.3-8.5-6.7-21.6-18.2-41.2-33.2-57.4-2.3-2.5-6-3.1-9-1.4l-25.8 14.9c-10.9-9.3-23.4-16.5-36.9-21.3v-29.8c0-3.4-2.4-6.4-5.7-7.1-22.3-5-45-4.8-66.2 0-3.3.7-5.7 3.7-5.7 7.1v29.8c-13.5 4.8-26 12-36.9 21.3l-25.8-14.9c-2.9-1.7-6.7-1.1-9 1.4-15 16.2-26.5 35.8-33.2 57.4-1 3.3.4 6.8 3.3 8.5l25.8 14.9c-2.6 14.1-2.6 28.5 0 42.6l-25.8 14.9c-3 1.7-4.3 5.2-3.3 8.5 6.7 21.6 18.2 41.1 33.2 57.4 2.3 2.5 6 3.1 9 1.4l25.8-14.9c10.9 9.3 23.4 16.5 36.9 21.3v29.8c0 3.4 2.4 6.4 5.7 7.1 22.3 5 45 4.8 66.2 0 3.3-.7 5.7-3.7 5.7-7.1v-29.8c13.5-4.8 26-12 36.9-21.3l25.8 14.9c2.9 1.7 6.7 1.1 9-1.4 15-16.2 26.5-35.8 33.2-57.4 1-3.3-.4-6.8-3.3-8.5l-25.8-14.9zM496 400.5c-26.8 0-48.5-21.8-48.5-48.5s21.8-48.5 48.5-48.5 48.5 21.8 48.5 48.5-21.7 48.5-48.5 48.5zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm201.2 226.5c-2.3-1.2-4.6-2.6-6.8-3.9l-7.9 4.6c-6 3.4-12.8 5.3-19.6 5.3-10.9 0-21.4-4.6-28.9-12.6-18.3-19.8-32.3-43.9-40.2-69.6-5.5-17.7 1.9-36.4 17.9-45.7l7.9-4.6c-.1-2.6-.1-5.2 0-7.8l-7.9-4.6c-16-9.2-23.4-28-17.9-45.7.9-2.9 2.2-5.8 3.2-8.7-3.8-.3-7.5-1.2-11.4-1.2h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c10.1 0 19.5-3.2 27.2-8.5-1.2-3.8-2-7.7-2-11.8v-9.2z"></path></svg></span>Suporte T.I</button>  
+                <br><br>
+                <a href="/auth/logout">SAIR</a>  
             </div>
-            <div class="col-4 middle-div">
-                <h2>PROFESSORES:</h2>
-                <table id="teachers-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <br>
-                <br>
-                <h3>Adicionar professor:</h3>
-                <form action="/coordinator/add-teacher" method="POST" autocomplete="off">
-                    <input type="text" name="name" placeholder="Nome" required="required">
+    </header>
+
+    <section id="materias">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-7 left-div">
+                    <h3 style="float:right">Matérias</h3>
+                    <div style="clear: both;"></div>
+                    
+                    <div class="input-group mt-5 mb-4">
+                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <div class="input-group-prepend">
+                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1; color: #116e71"><i class="fas fa-search" style="margin-right: 10px;"></i></button>
+                        </div>
+                    </div>
+                    
+                    <table id="subjects-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                     <br>
-                    <input type="email" name="email" placeholder="Email" required="required">
                     <br>
-                    <input type="password" name="password" placeholder="Senha" required="required">
-                    <br>
-                    <button type="submit">Adicionar</button>
-                </form>
-            </div>
-            <div class="col-4 right-div">
-                <h2>ALUNOS:</h2>
-                <table id="students-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <br>
-                <br>
-                <h3>Adicionar aluno:</h3>
-                <form action="/coordinator/add-student" method="POST">
-                    <input type="text" name="name" placeholder="Nome" required="required">
-                    <br>
-                    <input type="email" name="email" placeholder="Email" required="required">
-                    <br>
-                    <input type="password" name="password" placeholder="Senha" required="required">
-                    <br>
-                    <button type="submit">Adicionar</button>
-                </form>
+                    <div id="show-subject-info"></div>
+                </div>
+
+                <div class="col-5 right-div">
+                    <div id="adicionarMateria">
+                        <form action="/coordinator/add-subject" method="POST">
+                            <input type="text" name="name" placeholder="Nome" required="required">
+                            <br>
+                            <select name="teacherId" id="teacher-select">
+                                <option value="" disabled="disabled" selected="selected">Professor</option>
+                            </select>
+                            <br>
+                            <button type="submit">Adicionar matéria</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="professores">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-7 left-div">
+                    <h3 style="float: right;">Professores</h3>
+                    <div style="clear: both;"></div>
+
+                    <div class="input-group mt-5 mb-4">
+                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <div class="input-group-prepend">
+                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1;color: #116e71"><i class="fas fa-search" style="margin-right: 10px;"></i></button>
+                        </div>
+                    </div>
+
+                    <table id="teachers-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="col-5 right-div">
+                    <form action="/coordinator/add-teacher" method="POST" autocomplete="off">
+                        <input type="text" name="name" placeholder="Nome" required="required">
+                        <br>
+                        <input type="email" name="email" placeholder="Email" required="required">
+                        <br>
+                        <input type="password" name="password" placeholder="Senha" required="required">
+                        <br>
+                        <!--<input type="password" name="password" placeholder="Confirmar senha">-->
+                        <br><br>
+                        <button type="submit">Adicionar professor</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="alunos">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-7 left-div">
+                    <h3 style="float: right;">Alunos</h3>
+                    <div style="clear: both;"></div>
+
+                    <div class="input-group mt-5 mb-4">
+                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <div class="input-group-prepend">
+                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1;color: #116e71"><i class="fas fa-search" style="margin-right: 10px;"></i></button>
+                        </div>
+                    </div>
+
+                    <table id="students-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="col-5 right-div">
+                    <form action="/coordinator/add-student" method="POST">
+                        <input type="text" name="name" placeholder="Nome" required="required">
+                        <br>
+                        <input type="email" name="email" placeholder="Email" required="required">
+                        <br>
+                        <input type="password" name="password" placeholder="Senha" required="required">
+                        <br>
+                        <!--<input type="password" name="password" placeholder="Confirmar senha" required="required">-->
+                        <br><br>
+                        <button type="submit">Adicionar aluno</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <script src="scripts/coordinator.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
