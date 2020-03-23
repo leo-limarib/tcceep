@@ -1,5 +1,10 @@
 var selectedSubject = null;
 
+/* Inicializar com os formularios hidden */
+document.getElementById('materias').style.display = 'none'
+document.getElementById('professores').style.display = 'none'
+document.getElementById('alunos').style.display = 'none'
+
 function loadStudentsTable() {
   $("#students-table tbody").empty();
   $.ajax({
@@ -117,3 +122,77 @@ $(document).ready(() => {
   loadTeachersTable();
   loadStudentsTable();
 });
+
+
+function esconderFormularios(){
+  document.getElementById('materias').style.display = 'none'
+  document.getElementById('professores').style.display = 'none'
+  document.getElementById('alunos').style.display = 'none'
+  //document.getElementsByClassName('btApertado').style.color = '#BFC0C2'
+  //document.getElementById('bt1').style.color = '#BFC0C2'
+  //document.getElementById('bt2').style.color = '#BFC0C2'
+  //document.getElementById('bt3').style.color = '#BFC0C2'
+  //var x = document.getElementsByClassName('icones-menu')
+  //x[0].style.color = '#258a7a'
+  //x[1].style.color = '#258a7a'
+  //x[2].style.color = '#258a7a'
+  //x[3].style.color = '#258a7a'
+}
+
+function acionarMaterias(){
+  esconderFormularios()
+  var esconder = document.getElementById('materias')
+  esconder.style.display = 'block'
+  //document.getElementById('bt1').style.color = '#21E6C1'
+  //document.getElementById('bt2').style.color = '#BFC0C2'
+  //document.getElementById('bt3').style.color = '#BFC0C2'
+  
+}
+
+function acionarProfessores(){
+  esconderFormularios()
+  var esconder = document.getElementById('professores')
+  esconder.style.display = 'block'
+  //document.getElementById('bt2').style.color = '#21E6C1'
+
+}
+
+function acionarAlunos(){
+  esconderFormularios()
+  var esconder = document.getElementById('alunos')
+  esconder.style.display = 'block'
+  //document.getElementById('bt3').style.color = '#21E6C1'
+  
+}
+
+/* Hover das opções do menu lateral */
+$(document).ready(function(){
+  $(".hoverJQuery").hover(function(){
+    $(this).css("color", "#21E6C1");
+    }, function(){
+    $(this).css("color", "#BFC0C2");
+  });
+  $(".icones-menu").hover(function(){
+    $(this).css("color", "#21E6C1");
+    }, function(){
+    $(this).css("color", "#258a7a");
+  });
+});
+
+
+/* Hover dos icone do menu lateral mas só funciona se passar o mouse em cima do icone
+$(document).ready(function(){
+  $(".icones-menu").hover(function(){
+    $(this).css("color", "#21E6C1");
+    }, function(){
+    $(this).css("color", "#258a7a");
+  });
+});*/
+/* deu merda
+$(document).ready(function(){
+  $(".hoverJQuery").click(function(){
+    $(this).css("color", "#21E6C1");
+  });
+});*/
+
+

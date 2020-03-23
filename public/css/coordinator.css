@@ -1,6 +1,3 @@
-body {
-  padding: 0;
-}
 
 table thead tr th,
 table tbody tr td {
@@ -12,3 +9,227 @@ table tbody tr td {
   border: 1px solid black;
   padding: 0.5rem;
 }
+
+button{
+  cursor: pointer;
+}
+
+header button{
+  display: block;
+  border: none;
+  background: #292E33;
+  font-size: 22px;
+  color: #BFC0C2;
+  cursor: pointer;
+  padding-top: 15px;
+}
+
+header button i{
+  color: red;
+}
+/*
+header button:hover{
+  color: #21E6C1;
+}*/
+
+/* Tirar a borda do Botao de quando ele era pressionado */
+button:focus{
+  outline: thin dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
+select:focus{
+  outline: thin dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
+input:focus{
+  outline: thin dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
+
+body{
+  font-family: Helvetica, Arial, sans-serif;
+  background: #1E2125;
+  color: white;
+}
+
+header{
+  background: #292E33;
+  width: 300px;
+  height: 100%;
+  -webkit-border-top-right-radius: 3.5em;
+  -webkit-border-bottom-right-radius: 3.5em;
+  -moz-border-top-right-radius: 3.5em;
+  -moz-border-bottom-right-radius: 3.5em;
+  border-top-right-radius: 3.5em;
+  border-bottom-right-radius: 3.5em;
+  margin-right: 20px;
+}
+
+section{
+  padding-top: 40px;
+}
+
+html, body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h5{
+  color: #21E6C1;
+  opacity: 0.5;
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+
+/* Menu lateral */
+#menu-lateral{
+  margin-left: 20px;
+  padding-top: 25px;
+}
+
+/* ICONES DA NAVEGAÇÃO */
+.icones-menu{
+  font-size: 25px;
+  color: #258a7a;
+  /*color: #21E6C1;
+  opacity: 0.5;*/
+  padding-right: 15px;
+  padding-left: 2px;
+}
+
+.icone-fdp{
+  font-size: 30px;
+  padding-left: 9px;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0px;
+  padding-top: 20px;
+  font-size: 22px;
+}
+
+ul a{
+  text-decoration: none;
+  display: block;
+  padding-top: 10px;
+  color: #BFC0C2;
+}
+
+/* Area da foto */
+#foto{
+  background: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  float: left;
+}
+
+.usuario{
+  color: white;
+  font-size: 1em;
+  float: left;
+  margin-top: 7px;
+  margin-left: 13px;
+}
+
+.facul{
+  font-size: 0.8em;
+  color: #21E6C1;
+  float: left;
+  margin-top: -30px;
+  margin-left: 72px;
+  margin-bottom: 30px;
+}
+
+.icone-foto{
+  position: relative;
+  top: 7px;
+}
+
+#foto a{
+  color: black;
+}
+
+#foto a:hover{
+  color: black;
+}
+/*
+.botaoApertado{
+  color: #21E6C1;
+}*/
+
+/* LAYOUT DOS FORMULARIOS */
+
+form input{
+  background-color: #1E2125;
+  /*color: #292E33;*/
+  color: white;
+  border: none;
+  border-bottom: 3px solid #21E6C1;
+  padding-top: 15px;
+  font-size: 20px;
+  width: 300px;
+}
+
+form{
+  margin-top: 100px;
+}
+
+form button{
+  margin-top: 10px;
+  background: #21E6C1;
+  border: none;
+  border-radius: 3.5em;
+  padding: 5px 15px;
+}
+
+form button:hover{
+  background: rgb(23, 165, 139);
+  cursor: pointer;
+}
+
+#adicionarMateria button{
+  background: #424651;
+  color: white;
+}
+
+#adicionarMateria button:hover{
+  background: #33363f;
+}
+
+select{
+  background: #21E6C1;
+  margin-top: 10px;
+  border-radius: 3.5em;
+  padding: 7px 15px;
+  margin-bottom: 25px;
+}
+
+input.search{
+  background: #21E6C1;
+  border-top-left-radius: 3.5em;
+  border-bottom-left-radius: 3.5em;
+  padding: 4px 15px;
+  width: 200px;
+  border: none;
+}
+
+.bordaBotaoPesquisa{
+  border: none;
+  border-top-right-radius: 3.5em;
+  border-bottom-right-radius: 3.5em;
+}
+
+
