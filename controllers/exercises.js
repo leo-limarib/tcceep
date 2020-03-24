@@ -104,7 +104,7 @@ exports.solveExercise = (req, res) => {
         .json({ message: "Erro ao tentar submeter exercício." });
     }
 
-    //RUN TEST CASES
+    //Cria o processo.
     const codeProcess = spawn(`python3`, [
       `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`
     ]);

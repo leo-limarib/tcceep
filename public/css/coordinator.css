@@ -1,4 +1,3 @@
-
 table thead tr th,
 table tbody tr td {
   padding: 0.5rem;
@@ -10,21 +9,21 @@ table tbody tr td {
   padding: 0.5rem;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-header button{
+header button {
   display: block;
   border: none;
-  background: #292E33;
+  background: #292e33;
   font-size: 22px;
-  color: #BFC0C2;
+  color: #bfc0c2;
   cursor: pointer;
   padding-top: 15px;
 }
 
-header button i{
+header button i {
   color: red;
 }
 /*
@@ -33,33 +32,32 @@ header button:hover{
 }*/
 
 /* Tirar a borda do Botao de quando ele era pressionado */
-button:focus{
+button:focus {
   outline: thin dotted;
   outline: 0px auto -webkit-focus-ring-color;
   outline-offset: 0px;
 }
 
-select:focus{
+select:focus {
   outline: thin dotted;
   outline: 0px auto -webkit-focus-ring-color;
   outline-offset: 0px;
 }
 
-input:focus{
+input:focus {
   outline: thin dotted;
   outline: 0px auto -webkit-focus-ring-color;
   outline-offset: 0px;
 }
 
-
-body{
+body {
   font-family: Helvetica, Arial, sans-serif;
-  background: #1E2125;
+  background: #1e2125;
   color: white;
 }
 
-header{
-  background: #292E33;
+header {
+  background: #292e33;
   width: 300px;
   height: 100%;
   -webkit-border-top-right-radius: 3.5em;
@@ -71,18 +69,19 @@ header{
   margin-right: 20px;
 }
 
-section{
+section {
   padding-top: 40px;
 }
 
-html, body{
+html,
+body {
   height: 100%;
   padding: 0;
   margin: 0;
 }
 
-h5{
-  color: #21E6C1;
+h5 {
+  color: #21e6c1;
   opacity: 0.5;
   font-size: 20px;
   margin-bottom: 5px;
@@ -90,15 +89,14 @@ h5{
   margin-left: 10px;
 }
 
-
 /* Menu lateral */
-#menu-lateral{
+#menu-lateral {
   margin-left: 20px;
   padding-top: 25px;
 }
 
 /* ICONES DA NAVEGAÇÃO */
-.icones-menu{
+.icones-menu {
   font-size: 25px;
   color: #258a7a;
   /*color: #21E6C1;
@@ -107,12 +105,12 @@ h5{
   padding-left: 2px;
 }
 
-.icone-fdp{
+.icone-fdp {
   font-size: 30px;
   padding-left: 9px;
 }
 
-ul{
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0px;
@@ -120,15 +118,15 @@ ul{
   font-size: 22px;
 }
 
-ul a{
+ul a {
   text-decoration: none;
   display: block;
   padding-top: 10px;
-  color: #BFC0C2;
+  color: #bfc0c2;
 }
 
 /* Area da foto */
-#foto{
+#foto {
   background: white;
   height: 60px;
   width: 60px;
@@ -136,7 +134,7 @@ ul a{
   float: left;
 }
 
-.usuario{
+.usuario {
   color: white;
   font-size: 1em;
   float: left;
@@ -144,25 +142,25 @@ ul a{
   margin-left: 13px;
 }
 
-.facul{
+.facul {
   font-size: 0.8em;
-  color: #21E6C1;
+  color: #21e6c1;
   float: left;
   margin-top: -30px;
   margin-left: 72px;
   margin-bottom: 30px;
 }
 
-.icone-foto{
+.icone-foto {
   position: relative;
   top: 7px;
 }
 
-#foto a{
+#foto a {
   color: black;
 }
 
-#foto a:hover{
+#foto a:hover {
   color: black;
 }
 /*
@@ -172,53 +170,53 @@ ul a{
 
 /* LAYOUT DOS FORMULARIOS */
 
-form input{
-  background-color: #1E2125;
+form input {
+  background-color: #1e2125;
   /*color: #292E33;*/
   color: white;
   border: none;
-  border-bottom: 3px solid #21E6C1;
+  border-bottom: 3px solid #21e6c1;
   padding-top: 15px;
   font-size: 20px;
   width: 300px;
 }
 
-form{
+form {
   margin-top: 100px;
 }
 
-form button{
+form button {
   margin-top: 10px;
-  background: #21E6C1;
+  background: #21e6c1;
   border: none;
   border-radius: 3.5em;
   padding: 5px 15px;
 }
 
-form button:hover{
+form button:hover {
   background: rgb(23, 165, 139);
   cursor: pointer;
 }
 
-#adicionarMateria button{
+#adicionarMateria button {
   background: #424651;
   color: white;
 }
 
-#adicionarMateria button:hover{
+#adicionarMateria button:hover {
   background: #33363f;
 }
 
-select{
-  background: #21E6C1;
+select {
+  background: #21e6c1;
   margin-top: 10px;
   border-radius: 3.5em;
   padding: 7px 15px;
   margin-bottom: 25px;
 }
 
-input.search{
-  background: #21E6C1;
+input.search {
+  background: #21e6c1;
   border-top-left-radius: 3.5em;
   border-bottom-left-radius: 3.5em;
   padding: 4px 15px;
@@ -226,10 +224,8 @@ input.search{
   border: none;
 }
 
-.bordaBotaoPesquisa{
+.bordaBotaoPesquisa {
   border: none;
   border-top-right-radius: 3.5em;
   border-bottom-right-radius: 3.5em;
 }
-
-
