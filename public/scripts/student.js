@@ -14,7 +14,9 @@ function showExerciseToSolve(exerciseId) {
         `<h2>${exercise.name}</h2><p>${exercise.teacher}</p>` +
           `<p>${exercise.subject}</p><br>` +
           `<p>${exercise.question}</p>` +
-          `<form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data"><select id="language"></select><br><br>` +
+          `<form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data">` +
+          `<label name="exercise-id" value="${exercise._id}"></label>` +
+          `<select id="language"></select><br><br>` +
           `<input type="file" name="input_file" placeholder="Código" id="code-input" accept=".py">` +
           `<button type="submit">Submeter</button></form>`
       );

@@ -72,7 +72,7 @@ exports.createUser = (req, res, next) => {
 };
 
 /*
-req.body.name, req.body.email, req.body.password, req.session.user["campusId"]
+req.body.name, req.body.email, req.body.password, req.body.confPassword, req.session.user["campusId"]
 */
 exports.createTeacher = (req, res) => {
   return bcrypt
@@ -119,6 +119,7 @@ exports.createTeacher = (req, res) => {
     });
 };
 
+// req.body.name, req.body.email, req.body.password, req.body.confPassword, req.session.user["campusId"]
 exports.createStudent = (req, res) => {
   return bcrypt
     .hash(req.body.password, parseInt(process.env.HASH_SALT_ROUNDS))
@@ -206,7 +207,10 @@ exports.login = (req, res) => {
 req.session.user["campusId"] 
 */
 exports.getTeachersFromCampus = (req, res) => {
-  User.find({ campusId: req.session.user["campusId"], level: 2 })
+  User.find(
+    { campusId: req.session.user["campusId"], level: 2 },
+    { level: 0, password: 0 }
+  )
     .then(teachers => {
       return res.send(teachers);
     })
@@ -222,7 +226,10 @@ exports.getTeachersFromCampus = (req, res) => {
 req.session.user["campusId"]
 */
 exports.getStudentsFromCampus = (req, res) => {
-  User.find({ campusId: req.session.user["campusId"], level: 1 })
+  User.find(
+    { campusId: req.session.user["campusId"], level: 1 },
+    { level: 0, password: 0 }
+  )
     .then(students => {
       return res.send(students);
     })

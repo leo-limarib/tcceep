@@ -93,15 +93,13 @@
 
                 <div class="col-5 right-div">
                     <div id="adicionarMateria">
-                        <form action="/coordinator/add-subject" method="POST" id="new-subject-form">
-                            <input type="text" name="name" placeholder="Nome" required="required">
-                            <br>
-                            <select name="teacherId" id="teacher-select">
-                                <option value="" disabled="disabled" selected="selected">Professor</option>
-                            </select>
-                            <br>
-                            <button type="submit">Adicionar matéria</button>
-                        </form>
+                        <input type="text" name="name" placeholder="Nome" required="required" id="subject-name">
+                        <br>
+                        <select name="teacherId" id="teacher-select">
+                            <option value="" disabled="disabled" selected="selected">Professor</option>
+                        </select>
+                        <br>
+                        <button onclick="addSubject()">Adicionar matéria</button>
                     </div>
                 </div>
 
@@ -137,17 +135,16 @@
                 </div>
 
                 <div class="col-5 right-div">
-                    <form action="/coordinator/add-teacher" method="POST" autocomplete="off">
-                        <input type="text" name="name" placeholder="Nome" required="required">
-                        <br>
-                        <input type="email" name="email" placeholder="Email" required="required">
-                        <br>
-                        <input type="password" name="password" placeholder="Senha" required="required">
-                        <br>
-                        <!--<input type="password" name="password" placeholder="Confirmar senha">-->
-                        <br><br>
-                        <button type="submit">Adicionar professor</button>
-                    </form>
+                    <input type="text" name="name" placeholder="Nome" required="required" id="teacher-name">
+                    <br>
+                    <input type="email" name="email" placeholder="Email" required="required" id="teacher-email">
+                    <br>
+                    <input type="password" name="password" placeholder="Senha" required="required"
+                        id="teacher-password">
+                    <br>
+                    <input type="password" name="password" placeholder="Confirmar senha" id="teacher-conf-password">
+                    <br><br>
+                    <button onclick="addTeacher()">Adicionar professor</button>
                 </div>
             </div>
         </div>
@@ -179,19 +176,16 @@
                         <tbody></tbody>
                     </table>
                 </div>
-
                 <div class="col-5 right-div">
-                    <form action="/coordinator/add-student" method="POST">
-                        <input type="text" name="name" placeholder="Nome" required="required">
-                        <br>
-                        <input type="email" name="email" placeholder="Email" required="required">
-                        <br>
-                        <input type="password" name="password" placeholder="Senha" required="required">
-                        <br>
-                        <!--<input type="password" name="password" placeholder="Confirmar senha" required="required">-->
-                        <br><br>
-                        <button type="submit">Adicionar aluno</button>
-                    </form>
+                    <input type="text" placeholder="Nome" required="required" id="student-name">
+                    <br>
+                    <input type="email" placeholder="Email" required="required" id="student-email">
+                    <br>
+                    <input type="password" placeholder="Senha" required="required" id="student-password">
+                    <br>
+                    <input type="password" placeholder="Confirmar senha" required="required" id="student-conf-password">
+                    <br><br>
+                    <button onclick="addStudent()">Adicionar aluno</button>
                 </div>
             </div>
         </div>

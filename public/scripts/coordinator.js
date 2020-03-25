@@ -1,18 +1,20 @@
 var selectedSubject = null;
 
-//TODO
-/*
-  Por enquanto estamos usando um form no html para
-adicionar uma nova matéria. Isso faz com que o formulário
-redirecione o usuário pra outra página no submit.
-  Devemos criar uma função usando o js pra fazer o submit 
-do formulário e só atualizar a tabela qnd obtiver a resposta.
-*/
-
 //-- SUBJECTS PAGE --//
-function formListener() {
-  $("#new-subject-form").submit(() => {
-    loadSubjectsTable();
+function addSubject() {
+  $.ajax({
+    type: "POST",
+    url: window.location + "/add-subject",
+    contentType: "application/json",
+    data: JSON.stringify({
+      name: $("#subject-name").val(),
+      teacherId: $("#teacher-select option:selected").val()
+    }),
+    dataType: "json",
+    success: () => {
+      loadSubjectsTable();
+      $("#subject-name").val("");
+    }
   });
 }
 
@@ -68,13 +70,6 @@ function loadSubjectsTable() {
     }
   });
 }
-// SUBJECTS PAGE FINAL //
-
-function esconderFormularios() {
-  document.getElementById("materias").style.display = "none";
-  document.getElementById("professores").style.display = "none";
-  document.getElementById("alunos").style.display = "none";
-}
 
 function acionarMaterias() {
   esconderFormularios();
@@ -83,19 +78,124 @@ function acionarMaterias() {
   loadSubjectsTable();
   loadTeachersSelect();
 }
+// SUBJECTS PAGE FINAL //
+
+// -- TEACHERS PAGE -- //
+function addTeacher() {
+  $.ajax({
+    type: "POST",
+    url: window.location + "/add-teacher",
+    contentType: "application/json",
+    data: JSON.stringify({
+      name: $("#teacher-name").val(),
+      email: $("#teacher-email").val(),
+      password: $("#teacher-password").val(),
+      confPassword: $("#teacher-conf-password").val()
+    }),
+    dataType: "json",
+    success: () => {
+      loadTeachersTable();
+      resetInputs([
+        $("#teacher-name"),
+        $("#teacher-email"),
+        $("#teacher-password"),
+        $("#teacher-conf-password")
+      ]);
+    }
+  });
+}
+
+function showTeacherInfo(teacherId) {
+  //TODO
+  console.log(teacherId);
+}
+
+function loadTeachersTable() {
+  $("#teachers-table tbody").empty();
+  $.ajax({
+    type: "GET",
+    url: window.location + "/teachers",
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: teachers => {
+      teachers.forEach(t => {
+        $("#teachers-table tbody").append(
+          `<tr><td onclick="showTeacherInfo('${t._id}')">${t.name}</td></tr>`
+        );
+      });
+    }
+  });
+}
 
 function acionarProfessores() {
   esconderFormularios();
   var esconder = document.getElementById("professores");
   esconder.style.display = "block";
   //document.getElementById('bt2').style.color = '#21E6C1'
+  loadTeachersTable();
+}
+// TEACHERS PAGE FINAL //
+
+// -- STUDENTS PAGE -- //
+function addStudent() {
+  $.ajax({
+    type: "POST",
+    url: window.location + "/add-student",
+    contentType: "application/json",
+    data: JSON.stringify({
+      name: $("#student-name").val(),
+      email: $("#student-email").val(),
+      password: $("#student-password").val(),
+      confPassword: $("#student-conf-password").val()
+    }),
+    dataType: "json",
+    success: () => {
+      loadStudentsTable();
+      resetInputs([
+        $("#student-name"),
+        $("#student-email"),
+        $("#student-password"),
+        $("#student-conf-password")
+      ]);
+    }
+  });
+}
+
+function loadStudentsTable() {
+  $("#students-table tbody").empty();
+  $.ajax({
+    type: "GET",
+    url: window.location + "/students",
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: students => {
+      students.forEach(s => {
+        $("#students-table tbody").append(`<tr><td>${s.name}</td></tr>`);
+      });
+    }
+  });
 }
 
 function acionarAlunos() {
   esconderFormularios();
   var esconder = document.getElementById("alunos");
   esconder.style.display = "block";
-  //document.getElementById('bt3').style.color = '#21E6C1'
+  loadStudentsTable();
+}
+// STUDENTS PAGE FINAL //
+
+function resetInputs(inputs) {
+  inputs.forEach(i => {
+    i.val("");
+  });
+}
+
+function esconderFormularios() {
+  document.getElementById("materias").style.display = "none";
+  document.getElementById("professores").style.display = "none";
+  document.getElementById("alunos").style.display = "none";
 }
 
 /* Hover das opções do menu lateral */
