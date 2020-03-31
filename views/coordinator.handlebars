@@ -70,7 +70,7 @@
                     <div style="clear: both;"></div>
 
                     <div class="input-group mt-5 mb-4">
-                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
                             <button class="bordaBotaoPesquisa" type="button"
                                 style="background: #21E6C1; color: #116e71"><i class="fas fa-search"
@@ -81,18 +81,21 @@
                     <table id="subjects-table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th class="borderLeft">Nome</th>
+                                <th>Professor</th>
+                                <th class="borderRight">Estado</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div class="abaixoTabela">&nbsp;</div>
                     <br>
                     <br>
                     <div id="show-subject-info"></div>
                 </div>
 
                 <div class="col-5 right-div">
-                    <div id="adicionarMateria">
+                    <div id="adicionarMateria" class="marginFormularios">
                         <input type="text" name="name" placeholder="Nome" required="required" id="subject-name">
                         <br>
                         <select name="teacherId" id="teacher-select">
@@ -111,12 +114,20 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="col-7 left-div">
+                <div class="col-7 left-div" id="profMain">
                     <h3 style="float: right;">Professores</h3>
                     <div style="clear: both;"></div>
 
+                    <div id="teste" style="float: right;">
+                        <button class="btn-add" type="button" onclick="acionarProfessoresAdd()">
+                            <span>
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                        </button>
+                    </div>
+
                     <div class="input-group mt-5 mb-4">
-                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
                             <button class="bordaBotaoPesquisa" type="button"
                                 style="background: #21E6C1;color: #116e71"><i class="fas fa-search"
@@ -127,14 +138,16 @@
                     <table id="teachers-table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th class="borderLeft">Nome</th>
+                                <th class="borderRight">Email</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div class="abaixoTabela abaixoTabelaProfessor">&nbsp;</div>
                 </div>
 
-                <div class="col-5 right-div">
+                <div class="col-5 right-div marginFormularios" id="profSecond">
                     <input type="text" name="name" placeholder="Nome" required="required" id="teacher-name">
                     <br>
                     <input type="email" name="email" placeholder="Email" required="required" id="teacher-email">
@@ -154,12 +167,20 @@
         <div class="container-fluid">
             <div class="row">
 
-                <div class="col-7 left-div">
+                <div class="col-7 left-div" id="alunoMain">
                     <h3 style="float: right;">Alunos</h3>
                     <div style="clear: both;"></div>
 
+                    <div id="teste" style="float: right;">
+                        <button class="btn-add" type="button" onclick="acionarAlunosAdd()">
+                            <span>
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                        </button>
+                    </div>
+
                     <div class="input-group mt-5 mb-4">
-                        <input class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
                             <button class="bordaBotaoPesquisa" type="button"
                                 style="background: #21E6C1;color: #116e71"><i class="fas fa-search"
@@ -170,13 +191,15 @@
                     <table id="students-table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th class="borderLeft">Nome</th>
+                                <th class="borderRight">Email</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
                 </div>
-                <div class="col-5 right-div">
+                <div class="col-5 right-div marginFormularios" id="alunoSecond">
                     <input type="text" placeholder="Nome" required="required" id="student-name">
                     <br>
                     <input type="email" placeholder="Email" required="required" id="student-email">

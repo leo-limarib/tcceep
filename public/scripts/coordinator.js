@@ -64,7 +64,11 @@ function loadSubjectsTable() {
     success: subjects => {
       subjects.forEach(sub => {
         $("#subjects-table tbody").append(
-          `<tr><td style="cursor: pointer;" onclick="showSubjectInfo('${sub._id}')">${sub.name}</td></tr>`
+          `<tr style="cursor: pointer;" onclick="showSubjectInfo('${sub._id}')">
+            <td>${sub.name}</td>
+            <td>${sub.teacherId}</td>
+            <td>Em andamento</td>
+          </tr>`
         );
       });
     }
@@ -103,6 +107,7 @@ function addTeacher() {
       ]);
     }
   });
+  document.getElementById("profSecond").style.display = "none";
 }
 
 function showTeacherInfo(teacherId) {
@@ -117,23 +122,30 @@ function loadTeachersTable() {
     url: window.location + "/teachers",
     contentType: "application/json",
     data: null,
-    dataType: "json",
+    dataType: "json", 
     success: teachers => {
       teachers.forEach(t => {
         $("#teachers-table tbody").append(
-          `<tr><td onclick="showTeacherInfo('${t._id}')">${t.name}</td></tr>`
+          `<tr onclick="showTeacherInfo('${t._id}')">
+              <td>${t.name}</td>
+              <td>${t.email}</td>
+          </tr>`
         );
       });
-    }
+    } 
   });
 }
 
 function acionarProfessores() {
   esconderFormularios();
-  var esconder = document.getElementById("professores");
+  var esconder = document.getElementById("profMain");
   esconder.style.display = "block";
-  //document.getElementById('bt2').style.color = '#21E6C1'
   loadTeachersTable();
+}
+
+function acionarProfessoresAdd(){
+  var esconder = document.getElementById("profSecond")
+  esconder.style.display = "block";
 }
 // TEACHERS PAGE FINAL //
 
@@ -160,6 +172,7 @@ function addStudent() {
       ]);
     }
   });
+  document.getElementById("alunoSecond").style.display = "none";
 }
 
 function loadStudentsTable() {
@@ -172,7 +185,12 @@ function loadStudentsTable() {
     dataType: "json",
     success: students => {
       students.forEach(s => {
-        $("#students-table tbody").append(`<tr><td>${s.name}</td></tr>`);
+        $("#students-table tbody").append(
+          `<tr>
+            <td>${s.name}</td>
+            <td>${s.email}</td>
+          </tr>`
+        );
       });
     }
   });
@@ -180,9 +198,14 @@ function loadStudentsTable() {
 
 function acionarAlunos() {
   esconderFormularios();
-  var esconder = document.getElementById("alunos");
+  var esconder = document.getElementById("alunoMain");
   esconder.style.display = "block";
   loadStudentsTable();
+}
+
+function acionarAlunosAdd(){
+  var esconder = document.getElementById("alunoSecond")
+  esconder.style.display = "block";
 }
 // STUDENTS PAGE FINAL //
 
@@ -194,8 +217,10 @@ function resetInputs(inputs) {
 
 function esconderFormularios() {
   document.getElementById("materias").style.display = "none";
-  document.getElementById("professores").style.display = "none";
-  document.getElementById("alunos").style.display = "none";
+  document.getElementById("profMain").style.display = "none";
+  document.getElementById("profSecond").style.display = "none";
+  document.getElementById("alunoMain").style.display = "none";
+  document.getElementById("alunoSecond").style.display = "none";
 }
 
 /* Hover das opções do menu lateral */
@@ -216,3 +241,24 @@ $(document).ready(function() {
     }
   );
 });
+
+/*
+$(document).ready(function(){
+  $(".hoverJQuery").click(
+    function(){
+      $(this).css("color", "yellow");
+      $(this)
+        .children()
+        .css("color", "#21E6C1");
+    })
+})*/
+/*
+$(document).ready(function(){
+  $(".hoverJQuery").click(
+    function(){
+      $(this).addClass("buttonSelected");
+      $(this)
+        .children()
+        .addClass("buttonSelected");
+    })
+})*/
