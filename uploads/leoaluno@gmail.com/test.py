@@ -1,3 +1,7 @@
-for i in range(1, 5):
-	test = input()
-	print(test)
+test = input()
+aux = []
+for c in test:
+	aux.append(c)
+aux.sort()
+result = " "
+print(result.join(aux).replace(" ", ""))
