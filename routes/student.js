@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const subjectsController = require("../controllers/subjects");
 const exercisesController = require("../controllers/exercises");
-const scoresController = require("../controllers/score");
+const scoresController = require("../controllers/scores");
 
 router.get("/", (req, res) => {
   return res.render("student", { layout: false });

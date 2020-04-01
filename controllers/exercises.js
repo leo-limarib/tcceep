@@ -4,6 +4,7 @@ const Subject = require("../models/subject");
 const ObjectID = require("mongodb").ObjectID;
 const upload = require("../utils/upload");
 const { spawn } = require("child_process");
+const Score = require("../models/score");
 
 function exerciseInfoFactory(exercise) {
   return new Promise((resolve, reject) => {
@@ -26,6 +27,41 @@ function exerciseInfoFactory(exercise) {
       .catch(err => {
         reject(err);
       });
+  });
+}
+
+function getExercisesScore(exercises, studentEmail) {
+  return new Promise((resolve, reject) => {
+    var exs = [];
+    exercises.forEach(ex => {
+      Score.findOne({ exerciseId: ObjectID(ex._id), ownerEmail: studentEmail })
+        .then(score => {
+          if (score != null) {
+            exs.push({
+              _id: ex._id,
+              name: ex.name,
+              question: ex.question,
+              languages: ex.languages,
+              solved: score.solved,
+              score: score.score,
+              flaws: score.flaws
+            });
+          } else {
+            exs.push({
+              _id: ex._id,
+              name: ex.name,
+              question: ex.question,
+              languages: ex.languages
+            });
+          }
+          if (exs.length == exercises.length) {
+            resolve(exs);
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   });
 }
 
@@ -64,7 +100,16 @@ exports.getSubjectExercises = (req, res) => {
     { subjectId: 0, teacherId: 0, testCases: 0 }
   )
     .then(exercises => {
-      return res.send(exercises);
+      getExercisesScore(exercises, req.session.user["email"])
+        .then(exs => {
+          return res.send(exs);
+        })
+        .catch(err => {
+          console.log(err);
+          return res.status(500).json({
+            message: "Erro ao tentar retornar exercícios da matéria."
+          });
+        });
     })
     .catch(err => {
       console.log(err);

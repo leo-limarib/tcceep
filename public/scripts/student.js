@@ -37,11 +37,20 @@ function showSubjectExercises(subjectId) {
     dataType: "json",
     success: exercises => {
       exercises.forEach(ex => {
-        $("#exercises").append(
-          `<div class="exercise-card"><h4>${ex.name}` +
-            `</h4><p>${ex.question}</p>` +
-            `<a onclick="showExerciseToSolve('${ex._id}')" >Resolver exercício</a></div>`
-        );
+        if (ex.score == undefined) {
+          $("#exercises").append(
+            `<div class="exercise-card"><h4>${ex.name}` +
+              `</h4><p>${ex.question}</p>` +
+              `<a onclick="showExerciseToSolve('${ex._id}')" >Resolver exercício</a></div>`
+          );
+        } else {
+          $("#exercises").append(
+            `<div class="exercise-card"><h4>${ex.name}` +
+              `</h4><p>${ex.question}</p>` +
+              `Pontuação: ${ex.score}%<br>` +
+              `<a onclick="showExerciseToSolve('${ex._id}')" >Tentar novamente</a></div>`
+          );
+        }
       });
     }
   });
