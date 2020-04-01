@@ -66,7 +66,7 @@ function loadSubjectsTable() {
         $("#subjects-table tbody").append(
           `<tr style="cursor: pointer;" onclick="showSubjectInfo('${sub._id}')">
             <td>${sub.name}</td>
-            <td>${sub.teacherId}</td>
+            <td>${sub.teacherName}</td>
             <td>Em andamento</td>
           </tr>`
         );
@@ -122,7 +122,7 @@ function loadTeachersTable() {
     url: window.location + "/teachers",
     contentType: "application/json",
     data: null,
-    dataType: "json", 
+    dataType: "json",
     success: teachers => {
       teachers.forEach(t => {
         $("#teachers-table tbody").append(
@@ -132,7 +132,7 @@ function loadTeachersTable() {
           </tr>`
         );
       });
-    } 
+    }
   });
 }
 
@@ -143,8 +143,8 @@ function acionarProfessores() {
   loadTeachersTable();
 }
 
-function acionarProfessoresAdd(){
-  var esconder = document.getElementById("profSecond")
+function acionarProfessoresAdd() {
+  var esconder = document.getElementById("profSecond");
   esconder.style.display = "block";
 }
 // TEACHERS PAGE FINAL //
@@ -203,8 +203,8 @@ function acionarAlunos() {
   loadStudentsTable();
 }
 
-function acionarAlunosAdd(){
-  var esconder = document.getElementById("alunoSecond")
+function acionarAlunosAdd() {
+  var esconder = document.getElementById("alunoSecond");
   esconder.style.display = "block";
 }
 // STUDENTS PAGE FINAL //

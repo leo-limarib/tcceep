@@ -35,19 +35,49 @@ exports.addSubject = (req, res) => {
 /*
 req.session.user["campusId"]
 */
+function getSubjectsTeachers(subjects) {
+  return new Promise((resolve, reject) => {
+    var newSubjects = [];
+    for (const sub of subjects) {
+      User.findOne({ _id: ObjectID(sub.teacherId) })
+        .then(t => {
+          newSubjects.push({
+            _id: sub._id,
+            name: sub.name,
+            teacherName: t.name
+          });
+          if (newSubjects.length == subjects.length) {
+            resolve(newSubjects);
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    }
+  });
+}
+
 exports.getSubjectsFromCampus = (req, res) => {
   Subject.find(
     {
       campusId: req.session.user["campusId"]
     },
     {
-      teacherId: 0,
       campusId: 0,
       studentIds: 0
     }
   )
-    .then(subjects => {
-      return res.send(subjects);
+    .then(subs => {
+      getSubjectsTeachers(subs)
+        .then(subjects => {
+          return res.send(subjects);
+        })
+        .catch(err => {
+          console.log(err);
+          return res
+            .status(500)
+            .json({ message: "Erro ao tentar listar matérias do campus." });
+        });
     })
     .catch(err => {
       console.log(err);
