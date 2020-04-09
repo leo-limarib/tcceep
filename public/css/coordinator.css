@@ -3,154 +3,6 @@
   padding: 0.5rem;
 }
 
-button {
-  cursor: pointer;
-}
-
-header button {
-  display: block;
-  border: none;
-  background: #292e33;
-  font-size: 22px;
-  color: #bfc0c2;
-  padding-top: 15px;
-}
-
-/* Tirar a borda do Botao de quando ele era pressionado */
-button:focus {
-  outline: thin dotted;
-  outline: 0px auto -webkit-focus-ring-color;
-  outline-offset: 0px;
-}
-
-select:focus {
-  outline: thin dotted;
-  outline: 0px auto -webkit-focus-ring-color;
-  outline-offset: 0px;
-}
-
-input:focus {
-  outline: thin dotted;
-  outline: 0px auto -webkit-focus-ring-color;
-  outline-offset: 0px;
-}
-
-body {
-  font-family: Helvetica, Arial, sans-serif;
-  background: #1e2125;
-  color: white;
-}
-
-header {
-  background: #292e33;
-  width: 300px;
-  height: 100%;
-  -webkit-border-top-right-radius: 3.5em;
-  -webkit-border-bottom-right-radius: 3.5em;
-  -moz-border-top-right-radius: 3.5em;
-  -moz-border-bottom-right-radius: 3.5em;
-  border-top-right-radius: 3.5em;
-  border-bottom-right-radius: 3.5em;
-  margin-right: 20px;
-}
-
-section {
-  padding-top: 40px;
-}
-
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-h5 {
-  color: #21e6c1;
-  opacity: 0.5;
-  font-size: 20px;
-  margin-bottom: 5px;
-  margin-top: 20px;
-  margin-left: 10px;
-}
-
-.container-fluid{
-  min-width: 1200px;
-}
-
-/* Menu lateral */
-#menu-lateral {
-  margin-left: 20px;
-  padding-top: 25px;
-}
-
-/* ICONES DA NAVEGAÇÃO */
-.icones-menu {
-  font-size: 25px;
-  color: #258a7a;
-  padding-right: 15px;
-  padding-left: 2px;
-}
-
-.icone-fdp { /* icone das materias */
-  font-size: 30px;
-  padding-left: 9px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0px;
-  padding-top: 20px;
-  font-size: 22px;
-}
-
-ul a {
-  text-decoration: none;
-  display: block;
-  padding-top: 10px;
-  color: #bfc0c2;
-}
-
-/* Area da foto */
-#foto {
-  background: white;
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
-  float: left;
-}
-
-.usuario {
-  color: white;
-  font-size: 1em;
-  float: left;
-  margin-top: 7px;
-  margin-left: 13px;
-}
-
-.facul {
-  font-size: 0.8em;
-  color: #21e6c1;
-  float: left;
-  margin-top: -30px;
-  margin-left: 72px;
-  margin-bottom: 30px;
-}
-
-.icone-foto {
-  position: relative;
-  top: 7px;
-}
-
-#foto a {
-  color: black;
-}
-
-#foto a:hover {
-  color: black;
-}
-
 /* LAYOUT DOS FORMULARIOS */
 
 input {
@@ -213,17 +65,30 @@ input.search {
 }
 
 /* TABLE STYLE */
-
+/*
 table thead tr th,
 table tbody tr td {
-  padding: 0.6rem 2.2rem;
-}
+  padding: 0.6rem 2.5rem;
+}*/
 
 table{
+  background: #424651;
+  width: 100%;
+  min-width: 426px;
+}
+
+.encimaTabela table{
   border-top-right-radius: 2em;
   border-top-left-radius: 2em;
-  background: #424651;
-  width: 92%;
+}
+
+table thead tr th{
+  padding: 5px 10px;
+}
+
+table tbody tr td{
+  padding: 10px 0px 10px 20px;
+  max-width: 50px;
 }
 
 th{
@@ -248,10 +113,15 @@ tbody{
   border-top-right-radius: 2em;
 }
 
+.encimaTabela{
+  width: 92%;
+  min-width: 430px;
+}
+
 .abaixoTabela{ /* width: 491px*/
   background: #21E6C1;
   color: #21E6C1;
-  width: 91.9%;
+  width: 92%;
   height: 20px;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
@@ -282,6 +152,24 @@ tbody{
   background: #1bbb9e;
 }
 
+/* Button Remove Above Table*/
+.btn-trash{
+  background: #F34E4E;
+  border: none;
+  border-radius: 1em;
+  font-size: 22px;
+  padding: 0 20px;
+  position: relative;
+  left: -70px;
+  bottom: -50px;
+}
+
+.btn-trash-hover button:hover{
+  background: rgb(156, 50, 50);
+}
+
+/**/
+
 .input-group{
   max-width: 280px;
 }
@@ -289,7 +177,28 @@ tbody{
 #alunos{
   margin-top: -40px;
 }
-
+/*
 .buttonSelected{
   color: rgb(241, 20, 57);
+}
+
+.btnDelete{
+  color: #F34E4E;
+  margin-left: auto;
+  border: none;
+  background: none;
+  margin-left: 45px;
+}*/
+
+.scrollTabela{
+  width: 92%;
+  min-width: 426px;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: auto;
+  background: #424651;
+}
+
+.testeBtnSelected{
+  color: yellow;
 }

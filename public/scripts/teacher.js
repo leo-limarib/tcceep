@@ -29,7 +29,10 @@ function showSubjectInfo(subjectId) {
     dataType: "json",
     success: students => {
       $("#subject-info").append(
-        `<h3>Alunos matriculados:</h3><table id="sub-info-table"><thead><tr><th>Nome</th><th>Email</th></tr></thead><tbody></tbody></table>`
+        `<h3>Alunos matriculados</h3>
+        <div>
+          <table id="sub-info-table"><thead><tr><th>Nome</th><th>Email</th></tr></thead><tbody></tbody></table>
+        </div>`
       );
       students.forEach(student => {
         $("#sub-info-table tbody").append(
@@ -51,7 +54,9 @@ function listSubjects() {
     success: subjects => {
       subjects.forEach(subject => {
         $("#subjects-table tbody").append(
-          `<tr style="cursor: pointer;" onclick="showSubjectInfo('${subject._id}')"><td>${subject.name}</td></tr>`
+          `<div class="subjectStyle" style="cursor: pointer;" onclick="showSubjectInfo('${subject._id}')">
+            <tr><td><h4>${subject.name}</h4></td></tr>
+          </div>`
         );
         $("#select-subject").append(
           `<option value="${subject._id}">${subject.name}</option>`
@@ -64,3 +69,38 @@ function listSubjects() {
 $(document).ready(() => {
   listSubjects();
 });
+
+/* Hover Left Buttons */
+$(document).ready(function() {
+  hiddenForm();
+  $(".hoverJQuery").hover(
+    function() {
+      $(this).css("color", "#21E6C1");
+      $(this)
+        .children()
+        .css("color", "#21E6C1");
+    },
+    function() {
+      $(this).css("color", "#BFC0C2");
+      $(this)
+        .children()
+        .css("color", "#258a7a");
+    }
+  );
+});
+
+function hiddenForm() {
+  document.getElementById("materias").style.display = "none"
+  document.getElementById("exercicios").style.display = "none"
+  /*document.getElementById("subject-info").style.display = "none"*/
+}
+
+function displaySubject() {
+  hiddenForm()
+  document.getElementById("materias").style.display = "block"
+}
+
+function displayExercise() {
+  hiddenForm();
+  document.getElementById("exercicios").style.display = "block"
+}

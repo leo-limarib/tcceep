@@ -67,7 +67,9 @@ function loadSubjectsTable() {
           `<tr style="cursor: pointer;" onclick="showSubjectInfo('${sub._id}')">
             <td>${sub.name}</td>
             <td>${sub.teacherId}</td>
-            <td>Em andamento</td>
+            <td>
+              Em andamento
+            </td>
           </tr>`
         );
       });
@@ -242,23 +244,17 @@ $(document).ready(function() {
   );
 });
 
-/*
+/* Selected Botton */ /*  //FAIL
 $(document).ready(function(){
-  $(".hoverJQuery").click(
-    function(){
-      $(this).css("color", "yellow");
-      $(this)
-        .children()
-        .css("color", "#21E6C1");
-    })
-})*/
-/*
-$(document).ready(function(){
-  $(".hoverJQuery").click(
+  $(".testeBt1").click(
     function(){
       $(this).addClass("buttonSelected");
       $(this)
         .children()
         .addClass("buttonSelected");
-    })
-})*/
+  })
+}) */
+
+
+
+
