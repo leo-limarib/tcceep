@@ -1,6 +1,5 @@
 #subject-info {
-    margin-top: 3rem;
-    border: 1px solid black;
+    margin-top: 100px;
     width: 60%;
 }
 
@@ -8,3 +7,69 @@
 #sub-info-table thead tr th {
     padding: 0.5rem;
 }
+
+.icone-foto-teacher{
+    position: relative;
+    top: 14px;
+}
+
+tbody{
+    color: white;
+}
+
+#subjects-table{
+    margin-top: 50px;
+}
+
+.subjectStyle{
+    background: #248A7A;
+    padding: 15px 15px 15px 35px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 100px;
+    border-radius: 2em;
+}
+
+.subjectStyle:hover{
+    background: #1eceae;
+}
+/*
+.subjectStudents{
+
+}*/
+
+#subject-InfoExercises table {
+    border-top-right-radius: 2em;
+    border-top-left-radius: 2em;
+    background: #424651;
+    width: 100%;
+}
+  
+#subject-InfoExercises th {
+    background: #21E6C1;
+    color: rgb(57, 58, 58);
+    text-align: center;
+    padding: 10px;
+}
+  
+#subject-InfoExercises tr:hover{
+    background: #2f323a;
+}
+  
+#subject-InfoExercises tbody{
+    cursor: pointer;
+}
+
+td{
+    color: greenyellow;
+    padding: 15px;
+}
+
+#SOTESTE{
+    position: absolute;
+    width: 500px;
+    max-height: 400px;
+    height: 400px;
+    overflow-y: scroll;
+}
+
