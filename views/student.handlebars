@@ -12,14 +12,21 @@
 </head>
 
 <body>
-    <a href="/auth/logout">SAIR</a>
-    <div id="student-subjects">
-        <h3>Matriculado nas matérias:</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6"><a href="/auth/logout">SAIR</a>
+                <div id="student-subjects">
+                    <h3>Matriculado nas matérias:</h3>
+                </div>
+                <div id="exercises">
+                </div>
+                <script src="scripts/student.js"></script>
+            </div>
+            <div class="col-6">
+                <div id="solve-exercises"></div>
+            </div>
+        </div>
     </div>
-    <div id="exercises">
-    </div>
-    <div id="solve-exercises"></div>
-    <script src="scripts/student.js"></script>
 </body>
 
 </html>

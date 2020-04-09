@@ -4,6 +4,7 @@ const Subject = require("../models/subject");
 const ObjectID = require("mongodb").ObjectID;
 const upload = require("../utils/upload");
 const { spawn } = require("child_process");
+const Score = require("../models/score");
 
 function exerciseInfoFactory(exercise) {
   return new Promise((resolve, reject) => {
@@ -26,6 +27,41 @@ function exerciseInfoFactory(exercise) {
       .catch(err => {
         reject(err);
       });
+  });
+}
+
+function getExercisesScore(exercises, studentEmail) {
+  return new Promise((resolve, reject) => {
+    var exs = [];
+    exercises.forEach(ex => {
+      Score.findOne({ exerciseId: ObjectID(ex._id), ownerEmail: studentEmail })
+        .then(score => {
+          if (score != null) {
+            exs.push({
+              _id: ex._id,
+              name: ex.name,
+              question: ex.question,
+              languages: ex.languages,
+              solved: score.solved,
+              score: score.score,
+              flaws: score.flaws
+            });
+          } else {
+            exs.push({
+              _id: ex._id,
+              name: ex.name,
+              question: ex.question,
+              languages: ex.languages
+            });
+          }
+          if (exs.length == exercises.length) {
+            resolve(exs);
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   });
 }
 
@@ -64,7 +100,16 @@ exports.getSubjectExercises = (req, res) => {
     { subjectId: 0, teacherId: 0, testCases: 0 }
   )
     .then(exercises => {
-      return res.send(exercises);
+      getExercisesScore(exercises, req.session.user["email"])
+        .then(exs => {
+          return res.send(exs);
+        })
+        .catch(err => {
+          console.log(err);
+          return res.status(500).json({
+            message: "Erro ao tentar retornar exercícios da matéria."
+          });
+        });
     })
     .catch(err => {
       console.log(err);
@@ -96,43 +141,70 @@ exports.getExerciseToSolve = (req, res) => {
     });
 };
 
-exports.solveExercise = (req, res) => {
+//req.params.exerciseId
+exports.solveExercise = (req, res, next) => {
   upload(req, res, err => {
     if (err) {
       return res
         .status(500)
         .json({ message: "Erro ao tentar submeter exercício." });
     }
+    Exercise.findOne({ _id: ObjectID(req.params.exerciseId) })
+      .then(exercise => {
+        var score = 0;
+        var flaws = [];
+        for (var i = 0; i < exercise.testCases.inputs.length; i++) {
+          let index = i;
 
-    //Cria o processo.
-    const codeProcess = spawn(`python3`, [
-      `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`
-    ]);
+          //Creates the code process
+          const codeProcess = spawn(`python3`, [
+            `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`
+          ]);
 
-    codeProcess.on("error", err => {
-      console.log(err);
-    });
+          //Error listener
+          codeProcess.on("error", err => {
+            console.log(err);
+            return res
+              .status(500)
+              .json({ message: "Erro ao tentar executar código." });
+          });
 
-    codeProcess.stdout
-      .on("data", data => {
-        console.log(data);
+          //Stderr listener
+          codeProcess.stderr.on("data", data => {
+            console.log(data);
+            return res.status(500).json({ message: data });
+          });
+
+          codeProcess.stdout
+            .on("data", data => {
+              if (data.trim() == exercise.testCases.outputs[index]) {
+                score += 1;
+              } else {
+                flaws.push(index);
+              }
+              if (index == exercise.testCases.outputs.length - 1) {
+                //Aqui devemos adicionar o score do aluno ou modificá-lo
+                //se ele já existe.
+                res.locals.newScore = {
+                  exerciseId: ObjectID(req.params.exerciseId),
+                  solved: score == exercise.testCases.outputs.length,
+                  score: (score / exercise.testCases.outputs.length) * 100,
+                  flaws: flaws
+                };
+                return next();
+              }
+            })
+            .setEncoding("utf-8");
+
+          codeProcess.stdin.write(exercise.testCases.inputs[i]);
+          codeProcess.stdin.end();
+        }
       })
-      .setEncoding("utf-8");
-
-    codeProcess.stderr.on("data", data => {
-      //Aqui teriamos que ir guardando as linhas
-      //para, no final, comparar os outputs com
-      //as respostas corretas.
-      console.log(data);
-    });
-
-    codeProcess.stdin.setDefaultEncoding("utf-8");
-
-    //Aqui seriam os test cases do db.
-    codeProcess.stdin.write("input1\n");
-    codeProcess.stdin.write("input2\n");
-    codeProcess.stdin.write("input3\n");
-    codeProcess.stdin.write("input4\n");
-    codeProcess.stdin.end();
+      .catch(err => {
+        console.log(err);
+        return res
+          .status(500)
+          .json({ message: "Erro ao tentar resolver exercício." });
+      });
   });
 };
