@@ -8,25 +8,85 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/student.css">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-6"><a href="/auth/logout">SAIR</a>
-                <div id="student-subjects">
-                    <h3>Matriculado nas matérias:</h3>
+
+    <header style="float: left;">
+        <div id="menu-lateral">
+
+            <div id="foto-usuario">
+
+                <div id="foto">
+                    <a href="">
+                        <span class="icone-foto-student" style="font-size: 2em; margin-left: 13px;">
+                            <i class="fas fa-camera"></i>
+                        </span>
+                    </a>
                 </div>
-                <div id="exercises">
-                </div>
-                <script src="scripts/student.js"></script>
+                <span class="usuario">Nome Ilustrativo</span>
+                <span style="clear: both;" class="facul">FUMEP</span>
+
             </div>
-            <div class="col-6">
-                <div id="solve-exercises"></div>
+
+            <div style="clear: both;"></div>
+            <h5>Aluno</h5>
+
+            <button id="bt1" class="hoverJQuery" type="button" onclick="displayProvas()">
+                <span class="icones-menu icone-clipboard">
+                    <i class="fas fa-clipboard"></i>
+                </span>
+                Provas (UNV)
+            </button>
+            
+            <button id="bt2" class="hoverJQuery" type="button" onclick="displayExercicios()">
+                <span class="icones-menu">
+                    <svg class="svg-inline--fa fa-laptop-code fa-w-20" aria-hidden="true" focusable="false" 
+                    data-prefix="fas" data-icon="laptop-code" role="img" xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" 
+                    d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"></path></svg>
+                </span>
+                Exercícios
+            </button>
+            
+            <br><br>
+            <a href="/auth/logout">SAIR</a>
+        </div>
+    </header>
+
+    <section id="provas">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    Manutenção!
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="exercicios">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-6">
+                    <div id="student-subjects">
+                        <h3>Matriculado nas matérias:</h3>
+                    </div>
+                    <div id="exercises">
+                    </div>
+                    <script src="scripts/student.js"></script>
+                </div>
+
+                <div class="col-6">
+                    <div id="solve-exercises"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 </body>
 
 </html>

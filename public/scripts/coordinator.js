@@ -240,6 +240,11 @@ function esconderFormularios() {
   document.getElementById("alunoSecond").style.display = "none";
 }
 
+function backToSubject(){
+  document.getElementById("materiaDados").style.display = "none";
+  acionarMaterias();
+}
+
 /* Hover das opções do menu lateral */
 $(document).ready(function() {
   esconderFormularios();

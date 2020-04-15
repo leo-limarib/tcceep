@@ -75,6 +75,11 @@ table{
   background: #424651;
   width: 100%;
   min-width: 426px;
+  text-align: center;
+}
+
+td, th{
+  text-align: center;
 }
 
 .encimaTabela table{
@@ -164,11 +169,24 @@ tbody{
   bottom: -50px;
 }
 
+.position{
+  position: absolute;
+  left: 470px;
+  bottom: 50px;
+}
+
 .btn-trash-hover button:hover{
   background: rgb(156, 50, 50);
 }
 
 /**/
+.tituloAlunos{
+  color: #21e6c1;
+  font-size: 20px;
+  position: absolute;
+  left: 270px;
+  bottom: 50px;
+}
 
 .input-group{
   max-width: 280px;
@@ -201,4 +219,23 @@ tbody{
 
 .testeBtnSelected{
   color: yellow;
+}
+
+.back button{
+  background: none;
+  border: none;
+  color: #21e6c1;
+}
+
+.back button:hover{
+  color: #16917a;
+}
+
+#materiaDados{
+  min-width: 1270px;
+}
+
+#materiaDadosDireita{
+  margin-top: 100px;
+  border: 1px solid red;
 }

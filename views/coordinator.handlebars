@@ -39,7 +39,7 @@
             <h5>Coordenador</h5>
         
             <button id="bt1" class="hoverJQuery" type="button" onclick="acionarMaterias()"><span
-                    class="icones-menu icone-fdp"><i class="fas fa-clipboard"></i></span>Matérias</button>
+                    class="icones-menu icone-clipboard"><i class="fas fa-clipboard"></i></span>Matérias</button>
             <button id="bt2" class="hoverJQuery" type="button" onclick="acionarProfessores()"><span
                     class="icones-menu"><svg class="svg-inline--fa fa-chalkboard-teacher fa-w-20" aria-hidden="true"
                         focusable="false" data-prefix="fas" data-icon="chalkboard-teacher" role="img"
@@ -118,6 +118,56 @@
         </div>
     </section>
 
+<!--
+    <!-- Página da matéria (específica) 
+    <section id="materiaDados">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-7 left-div" style="min-width: 545px;">
+
+                    <h3 style="float: right;">Nome da Matéria</h3>
+
+                    <div class="back">
+                        <button type="button" onclick="backToSubject()"><< Voltar</button>
+                    </div>
+                    <div style="clear: both;"></div>
+
+                    <div class="btn-trash-hover" style="float: right;">
+                        <button class="btn-trash position" type="button">
+                            <span>
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div class="tituloAlunos" style="float: right;">Alunos matriculados</div>
+
+                    <div class="input-group mt-5 mb-4">
+                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <div class="input-group-prepend">
+                            <button class="bordaBotaoPesquisa" type="button"
+                                style="background: #21E6C1;color: #116e71">
+                                <i class="fas fa-search" style="margin-right: 10px;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    Tabela alunos cadastrados na matéria
+                </div>
+
+                <div class="col-5 right-div" id="materiaDadosDireita">
+
+                    <select name="teacherId" class="teacher-select">
+                            <option value="" disabled="disabled" selected="selected">Mudar professor</option>
+                    </select>
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+-->
     <section id="professores">
         <div class="container-fluid">
             <div class="row">
@@ -146,8 +196,9 @@
                         <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
                             <button class="bordaBotaoPesquisa" type="button"
-                                style="background: #21E6C1;color: #116e71"><i class="fas fa-search"
-                                    style="margin-right: 10px;"></i></button>
+                                style="background: #21E6C1;color: #116e71">
+                                <i class="fas fa-search" style="margin-right: 10px;"></i>
+                            </button>
                         </div>
                     </div>
 
