@@ -2,8 +2,18 @@ const Subject = require("../models/subject");
 const User = require("../models/user");
 const ObjectID = require("mongodb").ObjectID;
 
-function subjectInfoFactory(name, teacher, students) {
-  return { name: name, teacher: teacher, students: students };
+function subjectInfoFactory(
+  name,
+  teacher,
+  registeredStudents,
+  nonRegisteredStudents
+) {
+  return {
+    name: name,
+    teacher: teacher,
+    registeredStudents: registeredStudents,
+    nonRegisteredStudents: nonRegisteredStudents
+  };
 }
 
 /* 
@@ -89,6 +99,7 @@ exports.getSubjectsFromCampus = (req, res) => {
 
 /*
 req.query.subjectId
+req.session.user["campusId"]
 */
 exports.getSubjectInfo = (req, res) => {
   const subjectId = new ObjectID(req.query.subjectId);
@@ -96,9 +107,28 @@ exports.getSubjectInfo = (req, res) => {
     .then(sub => {
       User.findOne({ _id: sub.teacherId })
         .then(teacher => {
-          return res.send(
-            subjectInfoFactory(sub.name, teacher.name, sub.studentIds)
-          );
+          //get all students registered in the subject
+          User.find({ _id: { $in: sub.studentIds } })
+            .then(registeredStudents => {
+              //get all students non registered in the subject
+              User.find({
+                _id: { $nin: sub.studentIds },
+                campusId: req.session.user["campusId"],
+                level: 1
+              })
+                .then(nonRegisteredStudents => {
+                  return res.send(
+                    subjectInfoFactory(
+                      sub.name,
+                      teacher.name,
+                      registeredStudents,
+                      nonRegisteredStudents
+                    )
+                  );
+                })
+                .catch(err => {});
+            })
+            .catch(err => {});
         })
         .catch(err => {
           console.log(err);

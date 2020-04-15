@@ -1,6 +1,6 @@
 var selectedSubject = null;
 
-//-- SUBJECTS PAGE --//
+//-- SUBJECTS PAGE --/
 function addSubject() {
   $.ajax({
     type: "POST",
@@ -40,15 +40,32 @@ function showSubjectInfo(subjectId) {
   $("#show-subject-info").empty();
   $.ajax({
     type: "GET",
-    url: window.location + "/subject-info",
+    url: window.location + "/subject/info",
     contentType: "application/json",
     data: { subjectId: subjectId },
     dataType: "json",
     success: subject => {
       //Lista de alunos matriculados = subject.students (só os ids)
+      console.log(subject);
       $("#show-subject-info").append(
         `Nome: ${subject.name} | Professor: ${subject.teacher}`
       );
+
+      //TEMPORARY
+      $("#show-subject-info").append(
+        `<h3 style="margin: 0;">Alunos matriculados</h3><ul id="registered-list"></ul>`
+      );
+      subject.registeredStudents.forEach(student => {
+        $("#registered-list").append(`<li>${student.name}</li>`);
+      });
+
+      $("#show-subject-info").append(
+        `<br><h3 style="margin: 0;">Alunos não matriculados</h3><ul id="non-registered-list"></ul>`
+      );
+      subject.nonRegisteredStudents.forEach(student => {
+        $("#non-registered-list").append(`<li>${student.name}</li>`);
+      });
+      // -----------//
     }
   });
 }

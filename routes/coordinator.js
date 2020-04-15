@@ -12,7 +12,7 @@ router.get("/subjects", subjectsController.getSubjectsFromCampus);
 
 router.post("/add-subject", subjectsController.addSubject);
 
-router.get("/subject-info", subjectsController.getSubjectInfo);
+router.get("/subject/info", subjectsController.getSubjectInfo);
 // -------- //
 
 // TEACHERS //

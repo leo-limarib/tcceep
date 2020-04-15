@@ -285,3 +285,26 @@ exports.getStudentsFromSubject = (req, res) => {
         .json({ message: "Erro ao tentar listar estudantes da matéria." });
     });
 };
+
+// /coordinator/getnonregisteredstudents/:subjectId
+exports.getNonRegisteredStudents = (req, res) => {
+  Subject.findOne({ _id: req.params.subjectId })
+    .then(subject => {
+      User.find({ _id: { $nin: subject.studentIds } })
+        .then(students => {
+          return res.send(students);
+        })
+        .catch(err => {
+          console.log(err);
+          return res.status(500).json({
+            message: "Erro ao tentar listar alunos não matriculados na matéria."
+          });
+        });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({
+        message: "Erro ao tentar listar alunos não matriculados na matéria."
+      });
+    });
+};
