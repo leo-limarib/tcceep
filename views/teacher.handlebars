@@ -16,7 +16,7 @@
 
 <body>
 
-     <header style="float: left;">
+    <header style="float: left;">
         <div id="menu-lateral">
 
             <div id="foto-usuario">
@@ -37,7 +37,7 @@
             <h5>Professor</h5>
 
             <button id="bt1" class="hoverJQuery" type="button" onclick="displaySubject()">
-                <span class="icones-menu icone-fdp">
+                <span class="icones-menu icone-clipboard">
                     <i class="fas fa-clipboard"></i>
                 </span>
                 Matérias
@@ -129,55 +129,7 @@
         </div>
     </section>
 
-    <!--
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-5">
-                <div id="subjects">
-                    <h2>
-                        Matérias
-                    </h2>
-                    <table id="subjects-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div id="subject-info"></div>
-                <br>
-                <div id="subject-exercises"></div>
-            </div>
-            <div class="col-6">
-                <h2>
-                    Exercícios
-                </h2>
-                <h4>Adicionar exercício:</h4>
-                <form action="/teacher/exercises/create" method="POST">
-                    <input type="text" name="name" placeholder="Nome" required="required">
-                    <br>
-                    <br>
-                    <select name="subject" id="select-subject"></select>
-                    <br>
-                    <br>
-                    <textarea name="question" cols="30" rows="5" placeholder="Questão" required="required"></textarea>
-                    <p>
-                        Linguagem : python(única suportada até agora)
-                    </p>
-                    <textarea name="inputs" cols="30" rows="5" placeholder="Inputs (separados por @)"
-                        required="required"></textarea>
-                    <br>
-                    <br>
-                    <textarea name="outputs" cols="30" rows="5" placeholder="Outputs (separados por @)"
-                        required="required"></textarea>
-                    <br>
-                    <button type="submit">Adicionar</button>
-                </form>
-            </div>
-        </div>
-    </div>-->
+    
     <script src="scripts/teacher.js"></script>
 </body>
 

@@ -77,3 +77,37 @@ function listStudentSubjects() {
 $(document).ready(() => {
   listStudentSubjects();
 });
+
+/* Hover Left Buttons */
+$(document).ready(function() {
+  hiddenForm();
+  $(".hoverJQuery").hover(
+    function() {
+      $(this).css("color", "#21E6C1");
+      $(this)
+        .children()
+        .css("color", "#21E6C1");
+    },
+    function() {
+      $(this).css("color", "#BFC0C2");
+      $(this)
+        .children()
+        .css("color", "#258a7a");
+    }
+  );
+});
+
+function hiddenForm() {
+  document.getElementById("provas").style.display = "none"
+  document.getElementById("exercicios").style.display = "none"
+}
+
+function displayProvas() {
+  hiddenForm()
+  document.getElementById("provas").style.display = "block"
+}
+
+function displayExercicios() {
+  hiddenForm()
+  document.getElementById("exercicios").style.display = "block"
+}
