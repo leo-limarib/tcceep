@@ -13,10 +13,14 @@ router.get("/subjects", subjectsController.getSubjectsFromCampus);
 router.post("/add-subject", subjectsController.addSubject);
 
 router.get("/subject/info", subjectsController.getSubjectInfo);
+
+router.post("/add-student/:subjectId", subjectsController.addStudent);
 // -------- //
 
 // TEACHERS //
 router.get("/teachers", usersController.getTeachersFromCampus);
+
+router.get("/teacher/:teacherId", usersController.getTeacherInfo);
 
 router.post(
   "/add-teacher",
@@ -28,6 +32,8 @@ router.post(
 // STUDENTS //
 router.get("/students", usersController.getStudentsFromCampus);
 
+router.get("/student/:studentId", usersController.getStudentInfo);
+
 router.get(
   "/students/:subjectId/:mode",
   usersController.getStudentsFromSubject
@@ -38,8 +44,6 @@ router.post(
   usersController.checkDuplicate,
   usersController.createStudent
 );
-
-router.post("/add-student/:subjectId", subjectsController.addStudent);
 // -------- //
 
 module.exports = router;
