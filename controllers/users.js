@@ -9,7 +9,7 @@ require("dotenv").config();
 
 exports.checkDuplicate = (req, res, next) => {
   User.findOne({ email: req.body.email })
-    .then(user => {
+    .then((user) => {
       if (user != null) {
         return res
           .status(500)
@@ -17,7 +17,7 @@ exports.checkDuplicate = (req, res, next) => {
       }
       return next();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -30,7 +30,7 @@ exports.checkDuplicate = (req, res, next) => {
 exports.createUser = (req, res, next) => {
   return bcrypt
     .hash(req.body.password, parseInt(process.env.HASH_SALT_ROUNDS))
-    .then(hashedPass => {
+    .then((hashedPass) => {
       const user = new User(
         req.body.name,
         req.body.email,
@@ -44,7 +44,7 @@ exports.createUser = (req, res, next) => {
           res.locals.user = user;
           return fs.mkdir(
             path.join(__dirname, "..", "uploads", user.email),
-            err => {
+            (err) => {
               if (err) {
                 console.log(err);
                 return res
@@ -56,14 +56,14 @@ exports.createUser = (req, res, next) => {
             }
           );
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar adicionar usuário." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -77,7 +77,7 @@ req.body.name, req.body.email, req.body.password, req.body.confPassword, req.ses
 exports.createTeacher = (req, res) => {
   return bcrypt
     .hash(req.body.password, parseInt(process.env.HASH_SALT_ROUNDS))
-    .then(hashedPass => {
+    .then((hashedPass) => {
       const teacher = new User(
         req.body.name,
         req.body.email,
@@ -90,7 +90,7 @@ exports.createTeacher = (req, res) => {
         .then(() => {
           return fs.mkdir(
             path.join(__dirname, "..", "uploads", teacher.email),
-            err => {
+            (err) => {
               if (err) {
                 console.log(err);
                 return res
@@ -98,20 +98,20 @@ exports.createTeacher = (req, res) => {
                   .json({ message: "Erro ao tentar adicionar usuário." });
               } else {
                 return res.json({
-                  message: "Professor adicionado com sucesso."
+                  message: "Professor adicionado com sucesso.",
                 });
               }
             }
           );
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar adicionar professor." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -123,7 +123,7 @@ exports.createTeacher = (req, res) => {
 exports.createStudent = (req, res) => {
   return bcrypt
     .hash(req.body.password, parseInt(process.env.HASH_SALT_ROUNDS))
-    .then(hashedPass => {
+    .then((hashedPass) => {
       const student = new User(
         req.body.name,
         req.body.email,
@@ -136,7 +136,7 @@ exports.createStudent = (req, res) => {
         .then(() => {
           return fs.mkdir(
             path.join(__dirname, "..", "uploads", student.email),
-            err => {
+            (err) => {
               if (err) {
                 console.log(err);
                 return res
@@ -148,14 +148,14 @@ exports.createStudent = (req, res) => {
             }
           );
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar adicionar aluno." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -164,7 +164,7 @@ exports.createStudent = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  req.session.destroy(err => {
+  req.session.destroy((err) => {
     if (err) console.log(err);
     return res.redirect("/");
   });
@@ -172,11 +172,11 @@ exports.logout = (req, res) => {
 
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
-    .then(user => {
+    .then((user) => {
       if (user == null) return res.redirect("/auth/login");
       return bcrypt
         .compare(req.body.password, user.password)
-        .then(match => {
+        .then((match) => {
           if (match == true) {
             req.session.isLoggedIn = true;
             req.session.user = user;
@@ -211,10 +211,10 @@ exports.getTeachersFromCampus = (req, res) => {
     { campusId: req.session.user["campusId"], level: 2 },
     { level: 0, password: 0 }
   )
-    .then(teachers => {
+    .then((teachers) => {
       return res.send(teachers);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -230,10 +230,10 @@ exports.getStudentsFromCampus = (req, res) => {
     { campusId: req.session.user["campusId"], level: 1 },
     { level: 0, password: 0 }
   )
-    .then(students => {
+    .then((students) => {
       return res.send(students);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -243,9 +243,9 @@ exports.getStudentsFromCampus = (req, res) => {
 
 exports.getStudentsFromSubject = (req, res) => {
   Subject.findOne({ _id: ObjectID(req.params.subjectId) })
-    .then(subject => {
+    .then((subject) => {
       var studentsIds = [];
-      subject.studentIds.forEach(id => {
+      subject.studentIds.forEach((id) => {
         studentsIds.push(ObjectID(id));
       });
       if (req.params.mode == "in") {
@@ -253,13 +253,13 @@ exports.getStudentsFromSubject = (req, res) => {
           { _id: { $in: studentsIds } },
           { password: 0, level: 0, campusId: 0 }
         )
-          .then(students => {
+          .then((students) => {
             return res.send(students);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             return res.status(500).json({
-              message: "Erro ao tentar listar estudantes da matéria."
+              message: "Erro ao tentar listar estudantes da matéria.",
             });
           });
       } else if (req.params.mode == "nin") {
@@ -267,18 +267,18 @@ exports.getStudentsFromSubject = (req, res) => {
           { _id: { $nin: studentsIds }, level: 1 },
           { password: 0, level: 0, campusId: 0 }
         )
-          .then(students => {
+          .then((students) => {
             return res.send(students);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             return res.status(500).json({
-              message: "Erro ao tentar listar estudantes da matéria."
+              message: "Erro ao tentar listar estudantes da matéria.",
             });
           });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -289,22 +289,79 @@ exports.getStudentsFromSubject = (req, res) => {
 // /coordinator/getnonregisteredstudents/:subjectId
 exports.getNonRegisteredStudents = (req, res) => {
   Subject.findOne({ _id: req.params.subjectId })
-    .then(subject => {
+    .then((subject) => {
       User.find({ _id: { $nin: subject.studentIds } })
-        .then(students => {
+        .then((students) => {
           return res.send(students);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res.status(500).json({
-            message: "Erro ao tentar listar alunos não matriculados na matéria."
+            message:
+              "Erro ao tentar listar alunos não matriculados na matéria.",
           });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res.status(500).json({
-        message: "Erro ao tentar listar alunos não matriculados na matéria."
+        message: "Erro ao tentar listar alunos não matriculados na matéria.",
+      });
+    });
+};
+
+//req.params.teacherId
+exports.getTeacherInfo = (req, res) => {
+  User.findOne({ _id: ObjectID(req.params.teacherId) })
+    .then((teacher) => {
+      if (teacher == null) {
+        return res.status(500).json({ message: "Professor não encontrado." });
+      } else {
+        Subject.find({ teacherId: ObjectID(teacher._id) }, { studentIds: 0 })
+          .then((subjects) => {
+            return res.send({ teacher: teacher, subjects: subjects });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              message:
+                "Erro ao tentar listar matérias do professor selecionado.",
+            });
+          });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message:
+          "Erro ao tentar retornar informações sobre o professor selecionado.",
+      });
+    });
+};
+
+//req.params.studentId
+exports.getStudentInfo = (req, res) => {
+  User.findOne({ _id: ObjectID(req.params.studentId) })
+    .then((student) => {
+      Subject.find(
+        { studentIds: student._id },
+        { campusId: 0, teacherId: 0, studentIds: 0 }
+      )
+        .then((subjects) => {
+          return res.send({ student: student, subjects: subjects });
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).json({
+            message: "Erro ao tentar retornar matérias do aluno selecionado.",
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message:
+          "Erro ao tentar retornar informações sobre o aluno selecionado.",
       });
     });
 };

@@ -8,13 +8,13 @@ function addSubject() {
     contentType: "application/json",
     data: JSON.stringify({
       name: $("#subject-name").val(),
-      teacherId: $("#teacher-select option:selected").val()
+      teacherId: $("#teacher-select option:selected").val(),
     }),
     dataType: "json",
     success: () => {
       loadSubjectsTable();
       $("#subject-name").val("");
-    }
+    },
   });
 }
 
@@ -26,13 +26,13 @@ function loadTeachersSelect() {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: teachers => {
-      teachers.forEach(t => {
+    success: (teachers) => {
+      teachers.forEach((t) => {
         $("#teacher-select").append(
           `<option value="${t._id}">${t.name}</option>`
         );
       });
-    }
+    },
   });
 }
 
@@ -103,7 +103,7 @@ function showSubjectInfo(subjectId) {
     contentType: "application/json",
     data: { subjectId: subjectId },
     dataType: "json",
-    success: subject => {
+    success: (subject) => {
       //Lista de alunos matriculados = subject.students (só os ids)
       console.log(subject);
       $("#show-subject-info").append(
@@ -114,21 +114,18 @@ function showSubjectInfo(subjectId) {
       $("#show-subject-info").append(
         `<h3 style="margin: 0;">Alunos matriculados</h3><ul id="registered-list"></ul>`
       );
-      subject.registeredStudents.forEach(student => {
+      subject.registeredStudents.forEach((student) => {
         $("#registered-list").append(`<li>${student.name}</li>`);
       });
 
       $("#show-subject-info").append(
         `<br><h3 style="margin: 0;">Alunos não matriculados</h3><ul id="non-registered-list"></ul>`
       );
-      subject.nonRegisteredStudents.forEach(student => {
+      subject.nonRegisteredStudents.forEach((student) => {
         $("#non-registered-list").append(`<li>${student.name}</li>`);
       });
       // -----------//
     },
-    error: (err) => {
-      console.log(err);
-    }
   });
 }*/
 
@@ -140,8 +137,8 @@ function loadSubjectsTable() {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: subjects => {
-      subjects.forEach(sub => {
+    success: (subjects) => {
+      subjects.forEach((sub) => {
         $("#subjects-table tbody").append(
           `<tr style="cursor: pointer;" onclick="showSubjectMatriculados('${sub._id}'); naoMatriculados('${sub._id}'); retornaNomeMateria('${sub._id}'); acionarMateriaDados()">
             <td>${sub.name}</td>
@@ -150,7 +147,7 @@ function loadSubjectsTable() {
           </tr>`
         );
       });
-    }
+    },
   });
 }
 
@@ -173,7 +170,7 @@ function addTeacher() {
       name: $("#teacher-name").val(),
       email: $("#teacher-email").val(),
       password: $("#teacher-password").val(),
-      confPassword: $("#teacher-conf-password").val()
+      confPassword: $("#teacher-conf-password").val(),
     }),
     dataType: "json",
     success: () => {
@@ -182,16 +179,24 @@ function addTeacher() {
         $("#teacher-name"),
         $("#teacher-email"),
         $("#teacher-password"),
-        $("#teacher-conf-password")
+        $("#teacher-conf-password"),
       ]);
-    }
+    },
   });
   document.getElementById("profSecond").style.display = "none";
 }
 
 function showTeacherInfo(teacherId) {
-  //TODO
-  console.log(teacherId);
+  $.ajax({
+    type: "GET",
+    url: window.location + `/teacher/${teacherId}`,
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: (info) => {
+      console.log(info);
+    },
+  });
 }
 
 function loadTeachersTable() {
@@ -202,8 +207,8 @@ function loadTeachersTable() {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: teachers => {
-      teachers.forEach(t => {
+    success: (teachers) => {
+      teachers.forEach((t) => {
         $("#teachers-table tbody").append(
           `<tr onclick="showTeacherInfo('${t._id}')">
               <td>${t.name}</td>
@@ -211,7 +216,7 @@ function loadTeachersTable() {
           </tr>`
         );
       });
-    }
+    },
   });
 }
 
@@ -238,7 +243,7 @@ function addStudent() {
       name: $("#student-name").val(),
       email: $("#student-email").val(),
       password: $("#student-password").val(),
-      confPassword: $("#student-conf-password").val()
+      confPassword: $("#student-conf-password").val(),
     }),
     dataType: "json",
     success: () => {
@@ -247,11 +252,24 @@ function addStudent() {
         $("#student-name"),
         $("#student-email"),
         $("#student-password"),
-        $("#student-conf-password")
+        $("#student-conf-password"),
       ]);
-    }
+    },
   });
   document.getElementById("alunoSecond").style.display = "none";
+}
+
+function showStudentInfo(studentId) {
+  $.ajax({
+    type: "GET",
+    url: window.location + `/student/${studentId}`,
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: (info) => {
+      console.log(info);
+    },
+  });
 }
 
 function loadStudentsTable() {
@@ -262,16 +280,16 @@ function loadStudentsTable() {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: students => {
-      students.forEach(s => {
+    success: (students) => {
+      students.forEach((s) => {
         $("#students-table tbody").append(
-          `<tr>
+          `<tr onclick="showStudentInfo('${s._id}')">
             <td>${s.name}</td>
             <td>${s.email}</td>
           </tr>`
         );
       });
-    }
+    },
   });
 }
 
@@ -289,7 +307,7 @@ function acionarAlunosAdd() {
 // STUDENTS PAGE FINAL //
 
 function resetInputs(inputs) {
-  inputs.forEach(i => {
+  inputs.forEach((i) => {
     i.val("");
   });
 }
@@ -303,7 +321,7 @@ function esconderFormularios() {
   document.getElementById("materiaDados").style.display = "none";
 }
 
-function backToSubject(){
+function backToSubject() {
   document.getElementById("materiaDados").style.display = "none";
   acionarMaterias();
 }
@@ -314,25 +332,19 @@ function acionarMateriaDados(){
 }
 
 /* Hover das opções do menu lateral */
-$(document).ready(function() {
+$(document).ready(function () {
   esconderFormularios();
   $(".hoverJQuery").hover(
-    function() {
+    function () {
       $(this).css("color", "#21E6C1");
-      $(this)
-        .children()
-        .css("color", "#21E6C1");
+      $(this).children().css("color", "#21E6C1");
     },
-    function() {
+    function () {
       $(this).css("color", "#BFC0C2");
-      $(this)
-        .children()
-        .css("color", "#258a7a");
+      $(this).children().css("color", "#258a7a");
     }
   );
-});
-
-/* Selected Botton */ /*  //FAIL
+}); /*  //FAIL
 $(document).ready(function(){
   $(".testeBt1").click(
     function(){
@@ -343,6 +355,4 @@ $(document).ready(function(){
   })
 }) */
 
-
-
-
+/* Selected Botton */
