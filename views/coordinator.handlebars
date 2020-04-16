@@ -98,8 +98,8 @@
                     </div>
                     <div class="abaixoTabela">&nbsp;</div>
                     <br>
-                    <br>
-                    <div id="show-subject-info"></div>
+                    <br><!--
+                    <div id="show-subject-info"></div>-->
                 </div>
 
                 <div class="col-5 right-div">
@@ -118,23 +118,28 @@
         </div>
     </section>
 
-<!--
-    <!-- Página da matéria (específica) 
+
+    <!-- Página da matéria (específica) -->
     <section id="materiaDados">
+
+        <div id="nomeDaMateria"></div>
+
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-7 left-div" style="min-width: 545px;">
 
-                    <h3 style="float: right;">Nome da Matéria</h3>
+                    <!-- <h3 style="float: right;">Nome da Matéria</h3> -->
 
+                    <!-- BOTÃO VOLTAR PARA PÁGINA MATÉRIA -->
                     <div class="back">
                         <button type="button" onclick="backToSubject()"><< Voltar</button>
                     </div>
                     <div style="clear: both;"></div>
 
+                    <!-- BOTÃO EXCLUIR ALUNO DA MATÉRIA  -->
                     <div class="btn-trash-hover" style="float: right;">
-                        <button class="btn-trash position" type="button">
+                        <button class="btn-trash" type="button">
                             <span>
                                 <i class="fas fa-trash"></i>
                             </span>
@@ -143,6 +148,7 @@
                     
                     <div class="tituloAlunos" style="float: right;">Alunos matriculados</div>
 
+                    <!-- BOTÃO PESQUISA -->
                     <div class="input-group mt-5 mb-4">
                         <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
@@ -153,21 +159,76 @@
                         </div>
                     </div>
 
-                    Tabela alunos cadastrados na matéria
+                    <!-- TABELA ALUNOS MATRICULADOS NA MATÉRIA -->
+                    <div class="encimaTabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="borderLeft">Nome</th>
+                                    <th class="borderRight">Email</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="scrollTabela">
+                        <table id="show-subject-info-matriculados">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="abaixoTabela abaixoTabelaProfessor">&nbsp;</div>
                 </div>
 
+                <!-- Parte dos alunos não matriculados -->
                 <div class="col-5 right-div" id="materiaDadosDireita">
-
+                    
+                    <!-- Alterar professor da matéria -->
                     <select name="teacherId" class="teacher-select">
                             <option value="" disabled="disabled" selected="selected">Mudar professor</option>
                     </select>
+                    
+                    <!-- Botão confirmar a troca de professor -->
+                    <div class="btn-confirmar-hover" style="float: right;">
+                        <button type="button" class="btn-confirmar">
+                            <span>
+                                <i class="fas fa-check-circle"></i>
+                            </span>
+                        </button>
+                    </div>
 
+                    <!-- Tabela alunos não matriculados na matéria -->
+                    <div class="encimaTabela encimaTabelaMatriculados">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="borderLeft">Nome</th>
+                                    <th class="borderRight">Email</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="scrollTabela">
+                        <table id="show-subject-info-nao-matriculados">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="abaixoTabela abaixoTabelaNaoMatriculado">&nbsp;</div>
+
+                    <!-- Botão matricular alunos -->
+                    <div class="btn-matricularAlunosHover d-flex justify-content-center">
+                        <button type="button" class="btn-matricularAlunos">
+                            Matricular alunos
+                        </button>
+                    </div>
                     
                 </div>
             </div>
         </div>
     </section>
--->
+
     <section id="professores">
         <div class="container-fluid">
             <div class="row">

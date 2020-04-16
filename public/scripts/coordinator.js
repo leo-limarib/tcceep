@@ -36,6 +36,65 @@ function loadTeachersSelect() {
   });
 }
 
+//Tabela alunos matriculados
+function showSubjectMatriculados(subjectId){
+  $("#show-subject-info-matriculados tbody").empty();
+  $.ajax({
+    type: "GET",
+    url: window.location + "/subject/info",
+    contentType: "application/json",
+    data: { subjectId: subjectId },
+    dataType: "json",
+    success: subject => {
+      subject.registeredStudents.forEach(student => {
+        $("#show-subject-info-matriculados tbody").append(
+          `<tr style="cursor: pointer;">
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+          </tr>`);
+      });
+    }
+  });
+}
+
+//Tabela alunos não matriculados
+function naoMatriculados(subjectId){
+  $("#show-subject-info-nao-matriculados tbody").empty();
+  $.ajax({
+    type: "GET",
+    url: window.location + "/subject/info",
+    contentType: "application/json",
+    data: { subjectId: subjectId },
+    dataType: "json",
+    success: subject => {
+      subject.nonRegisteredStudents.forEach(student => {
+        $("#show-subject-info-nao-matriculados tbody").append(
+          `<tr style="cursor: pointer;">
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+          </tr>`);
+      });
+    }
+  });
+}
+
+function retornaNomeMateria(subjectId){
+  $("#nomeDaMateria").empty();
+  $.ajax({
+    type: "GET",
+    url: window.location + "/subject/info",
+    contentType: "application/json",
+    data: { subjectId: subjectId },
+    dataType: "json",
+    success: subject => {
+      $("#nomeDaMateria").append(
+        `<h3>${subject.name}</h3>`
+      );
+    }
+  });
+}
+/* 
+/* NÃO TA USANDO ESSA LIXEIRA AQ, MAS DEIXA SALVO PRA SE DER MERDA 
 function showSubjectInfo(subjectId) {
   $("#show-subject-info").empty();
   $.ajax({
@@ -66,9 +125,12 @@ function showSubjectInfo(subjectId) {
         $("#non-registered-list").append(`<li>${student.name}</li>`);
       });
       // -----------//
+    },
+    error: (err) => {
+      console.log(err);
     }
   });
-}
+}*/
 
 function loadSubjectsTable() {
   $("#subjects-table tbody").empty();
@@ -81,7 +143,7 @@ function loadSubjectsTable() {
     success: subjects => {
       subjects.forEach(sub => {
         $("#subjects-table tbody").append(
-          `<tr style="cursor: pointer;" onclick="showSubjectInfo('${sub._id}')">
+          `<tr style="cursor: pointer;" onclick="showSubjectMatriculados('${sub._id}'); naoMatriculados('${sub._id}'); retornaNomeMateria('${sub._id}'); acionarMateriaDados()">
             <td>${sub.name}</td>
             <td>${sub.teacherName}</td>
             <td>Em andamento</td>
@@ -238,11 +300,17 @@ function esconderFormularios() {
   document.getElementById("profSecond").style.display = "none";
   document.getElementById("alunoMain").style.display = "none";
   document.getElementById("alunoSecond").style.display = "none";
+  document.getElementById("materiaDados").style.display = "none";
 }
 
 function backToSubject(){
   document.getElementById("materiaDados").style.display = "none";
   acionarMaterias();
+}
+
+function acionarMateriaDados(){
+  document.getElementById("materias").style.display = "none";
+  document.getElementById("materiaDados").style.display = "block";
 }
 
 /* Hover das opções do menu lateral */
