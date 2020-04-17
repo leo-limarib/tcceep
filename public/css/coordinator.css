@@ -141,6 +141,14 @@ tbody{
   min-width: 435px;
 }
 
+.abaixoTabelaNaoMatriculado{
+  min-width: 425px;
+}
+
+.encimaTabelaMatriculados{
+  min-width: 425px;
+}
+
 /* Button Add Above Table*/
 .btn-add{
   background: #21e6c1;
@@ -169,23 +177,46 @@ tbody{
   bottom: -50px;
 }
 
-.position{
-  position: absolute;
-  left: 470px;
-  bottom: 50px;
-}
-
 .btn-trash-hover button:hover{
   background: rgb(156, 50, 50);
+}
+
+/* Botão confirmar troca de professor da matéria */
+.btn-confirmar{
+  background: none;
+  border: none;
+  color: #21e6c1;
+  font-size: 35px;
+  position: relative;
+  left: -200px;
+  top: 2px;
+}
+
+.btn-confirmar-hover button:hover{
+  color: #169981;
+}
+
+/* Botão matricular alunos na matéria */
+.btn-matricularAlunos{
+  background: #21e6c1;
+  font-size: 20px;
+  border: none;
+  padding: 5px 20px;
+  margin-top: 30px;
+  border-radius: 2em;
+}
+
+.btn-matricularAlunosHover button:hover{
+  background: #169981;
 }
 
 /**/
 .tituloAlunos{
   color: #21e6c1;
   font-size: 20px;
-  position: absolute;
-  left: 270px;
-  bottom: 50px;
+  position: relative;
+  bottom: -50px;
+  right: 100px;
 }
 
 .input-group{
@@ -195,18 +226,6 @@ tbody{
 #alunos{
   margin-top: -40px;
 }
-/*
-.buttonSelected{
-  color: rgb(241, 20, 57);
-}
-
-.btnDelete{
-  color: #F34E4E;
-  margin-left: auto;
-  border: none;
-  background: none;
-  margin-left: 45px;
-}*/
 
 .scrollTabela{
   width: 92%;
@@ -237,5 +256,10 @@ tbody{
 
 #materiaDadosDireita{
   margin-top: 100px;
-  border: 1px solid red;
 }
+
+#nomeDaMateria{
+  margin: 0 auto;
+  text-align: center;
+}
+
