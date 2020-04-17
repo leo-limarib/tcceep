@@ -9,22 +9,22 @@ const Score = require("../models/score");
 function exerciseInfoFactory(exercise) {
   return new Promise((resolve, reject) => {
     User.findOne({ _id: ObjectID(exercise.teacherId) })
-      .then(teacher => {
+      .then((teacher) => {
         Subject.findOne({ _id: ObjectID(exercise.subjectId) })
-          .then(subject => {
+          .then((subject) => {
             resolve({
               name: exercise.name,
               teacher: teacher.name,
               subject: subject.name,
               question: exercise.question,
-              languages: exercise.languages
+              languages: exercise.languages,
             });
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err);
           });
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -33,9 +33,9 @@ function exerciseInfoFactory(exercise) {
 function getExercisesScore(exercises, studentEmail) {
   return new Promise((resolve, reject) => {
     var exs = [];
-    exercises.forEach(ex => {
+    exercises.forEach((ex) => {
       Score.findOne({ exerciseId: ObjectID(ex._id), ownerEmail: studentEmail })
-        .then(score => {
+        .then((score) => {
           if (score != null) {
             exs.push({
               _id: ex._id,
@@ -44,21 +44,21 @@ function getExercisesScore(exercises, studentEmail) {
               languages: ex.languages,
               solved: score.solved,
               score: score.score,
-              flaws: score.flaws
+              flaws: score.flaws,
             });
           } else {
             exs.push({
               _id: ex._id,
               name: ex.name,
               question: ex.question,
-              languages: ex.languages
+              languages: ex.languages,
             });
           }
           if (exs.length == exercises.length) {
             resolve(exs);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -76,7 +76,7 @@ exports.addNewExercise = (req, res) => {
     ["python3"],
     {
       inputs: testInputs,
-      outputs: testOutputs
+      outputs: testOutputs,
     }
   );
   newEx
@@ -84,7 +84,7 @@ exports.addNewExercise = (req, res) => {
     .then(() => {
       return res.json({ message: "Exercício adicionado com sucesso." });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -95,23 +95,23 @@ exports.addNewExercise = (req, res) => {
 exports.getSubjectExercises = (req, res) => {
   Exercise.find(
     {
-      subjectId: ObjectID(req.params.subjectId)
+      subjectId: ObjectID(req.params.subjectId),
     },
     { subjectId: 0, teacherId: 0, testCases: 0 }
   )
-    .then(exercises => {
+    .then((exercises) => {
       getExercisesScore(exercises, req.session.user["email"])
-        .then(exs => {
+        .then((exs) => {
           return res.send(exs);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res.status(500).json({
-            message: "Erro ao tentar retornar exercícios da matéria."
+            message: "Erro ao tentar retornar exercícios da matéria.",
           });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -121,19 +121,19 @@ exports.getSubjectExercises = (req, res) => {
 
 exports.getExerciseToSolve = (req, res) => {
   Exercise.findOne({ _id: ObjectID(req.params.exerciseId) })
-    .then(exercise => {
+    .then((exercise) => {
       exerciseInfoFactory(exercise)
-        .then(ex => {
+        .then((ex) => {
           return res.send(ex);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar retornar exercício." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -143,14 +143,14 @@ exports.getExerciseToSolve = (req, res) => {
 
 //req.params.exerciseId
 exports.solveExercise = (req, res, next) => {
-  upload(req, res, err => {
+  upload(req, res, (err) => {
     if (err) {
       return res
         .status(500)
         .json({ message: "Erro ao tentar submeter exercício." });
     }
     Exercise.findOne({ _id: ObjectID(req.params.exerciseId) })
-      .then(exercise => {
+      .then((exercise) => {
         var score = 0;
         var flaws = [];
         for (var i = 0; i < exercise.testCases.inputs.length; i++) {
@@ -158,11 +158,11 @@ exports.solveExercise = (req, res, next) => {
 
           //Creates the code process
           const codeProcess = spawn(`python3`, [
-            `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`
+            `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`,
           ]);
 
           //Error listener
-          codeProcess.on("error", err => {
+          codeProcess.on("error", (err) => {
             console.log(err);
             return res
               .status(500)
@@ -170,13 +170,13 @@ exports.solveExercise = (req, res, next) => {
           });
 
           //Stderr listener
-          codeProcess.stderr.on("data", data => {
+          codeProcess.stderr.on("data", (data) => {
             console.log(data);
             return res.status(500).json({ message: data });
           });
 
           codeProcess.stdout
-            .on("data", data => {
+            .on("data", (data) => {
               if (data.trim() == exercise.testCases.outputs[index]) {
                 score += 1;
               } else {
@@ -189,7 +189,7 @@ exports.solveExercise = (req, res, next) => {
                   exerciseId: ObjectID(req.params.exerciseId),
                   solved: score == exercise.testCases.outputs.length,
                   score: (score / exercise.testCases.outputs.length) * 100,
-                  flaws: flaws
+                  flaws: flaws,
                 };
                 return next();
               }
@@ -200,7 +200,7 @@ exports.solveExercise = (req, res, next) => {
           codeProcess.stdin.end();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         return res
           .status(500)

@@ -9,21 +9,21 @@ function showExerciseToSolve(exerciseId) {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: exercise => {
+    success: (exercise) => {
       $("#solve-exercises").append(
         `<h2>${exercise.name}</h2><p>${exercise.teacher}</p>` +
           `<p>${exercise.subject}</p><br>` +
-          `<p>${exercise.question}</p>` +
+          `<p>${exercise.question.replace("/\r\n/g", "<br>")}</p>` +
           `<form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data">` +
           `<label name="exercise-id" value="${exercise._id}"></label>` +
           `<select id="language"></select><br><br>` +
           `<input type="file" name="input_file" placeholder="Código" id="code-input" accept=".py">` +
           `<button type="submit">Submeter</button></form>`
       );
-      exercise.languages.forEach(lang => {
+      exercise.languages.forEach((lang) => {
         $("#language").append(`<option value="${lang}">${lang}</option>`);
       });
-    }
+    },
   });
 }
 
@@ -35,8 +35,8 @@ function showSubjectExercises(subjectId) {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: exercises => {
-      exercises.forEach(ex => {
+    success: (exercises) => {
+      exercises.forEach((ex) => {
         if (ex.score == undefined) {
           $("#exercises").append(
             `<div class="exercise-card"><h4>${ex.name}` +
@@ -52,7 +52,7 @@ function showSubjectExercises(subjectId) {
           );
         }
       });
-    }
+    },
   });
 }
 
@@ -63,14 +63,14 @@ function listStudentSubjects() {
     contentType: "application/json",
     data: null,
     dataType: "json",
-    success: subjects => {
+    success: (subjects) => {
       $("#student-subjects").append(`<ul id="subjects-list"></ul>`);
-      subjects.forEach(sub => {
+      subjects.forEach((sub) => {
         $("#subjects-list").append(
           `<li style="cursor: pointer; font-size: 20px;" onclick="showSubjectExercises('${sub._id}')">${sub.name}</li>`
         );
       });
-    }
+    },
   });
 }
 
@@ -79,35 +79,31 @@ $(document).ready(() => {
 });
 
 /* Hover Left Buttons */
-$(document).ready(function() {
+$(document).ready(function () {
   hiddenForm();
   $(".hoverJQuery").hover(
-    function() {
+    function () {
       $(this).css("color", "#21E6C1");
-      $(this)
-        .children()
-        .css("color", "#21E6C1");
+      $(this).children().css("color", "#21E6C1");
     },
-    function() {
+    function () {
       $(this).css("color", "#BFC0C2");
-      $(this)
-        .children()
-        .css("color", "#258a7a");
+      $(this).children().css("color", "#258a7a");
     }
   );
 });
 
 function hiddenForm() {
-  document.getElementById("provas").style.display = "none"
-  document.getElementById("exercicios").style.display = "none"
+  document.getElementById("provas").style.display = "none";
+  document.getElementById("exercicios").style.display = "none";
 }
 
 function displayProvas() {
-  hiddenForm()
-  document.getElementById("provas").style.display = "block"
+  hiddenForm();
+  document.getElementById("provas").style.display = "block";
 }
 
 function displayExercicios() {
-  hiddenForm()
-  document.getElementById("exercicios").style.display = "block"
+  hiddenForm();
+  document.getElementById("exercicios").style.display = "block";
 }
