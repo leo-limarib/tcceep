@@ -66,14 +66,15 @@
     </header>
 
     <section id="materias">
+
+        <div class="centralizar"><h2>Matérias</h2></div>
+
         <div class="container-fluid">
             <div class="row">
 
                 <div class="col-5">
                     <div id="subjects">
-                        <h2 style="float: right;">
-                        Matérias
-                        </h2>
+                        
                         <div style="clear: both;"></div>
                         <table id="subjects-table">
                             <thead><!--
@@ -86,43 +87,168 @@
                     </div>
                 </div>
 
+                <!-- Parte dos alunos e exercicios matriculados -->
                 <div class="col-7" id="subject-InfoExercises">
-                    <div id="subject-info"></div>
+
+                    <!-- PARTE DOS ALUNSO CADASTRADOS NA MATÉRIA -->
+                    <div class="tituloAlunosMatriculados">Alunos matriculados</div>
+
+                    <div class="encimaTabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="borderLeft">Nome</th>
+                                    <th class="borderRight">Email</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="scrollTabela">
+                        <table id="subject-info">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
+
                     <br>
-                    <div id="subject-exercises"></div>
+
+                    <!-- PARTE DOS EXERCÍCIOS CADASTRADOS NA MATÉRIA -->
+                    <div class="tituloExerciciosMateria">Exercícios</div>
+
+                    <div class="encimaTabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="borderLeft">Nome</th>
+                                    <th class="borderRight">Linguagem</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="scrollTabela">
+                        <table id="subject-exercises">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
+                    <!--
+                    <div id="subject-exercises"></div>-->
                 </div>
 
             </div>
         </div>
     </section>
 
+    <section id="exerciciosMain">
+
+        <div class="centralizar"><h2>Exercícios</h2></div>
+
+        <div class=" container-fluid">
+            <div class=" row">
+
+                <div class="col-7" id="subject-InfoExercisesMain">
+                    
+                    <div class="hoverAdd">
+                        <button class="btn-add-exercicio" onclick="displayExerciseAdd()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="hoverAdd mr-3">
+                        <button class="btn-add-exercicio">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="input-group mt-5 mb-4" style="max-width: 300px;">
+                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
+                        <div class="input-group-prepend">
+                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1;color: #116e71">
+                                <i class="fas fa-search" style="margin-right: 10px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="encimaTabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="borderLeft">Nome</th>
+                                    <th>Matéria</th>
+                                    <th class="borderRight">Linguagem</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="scrollTabela">
+                        <table id="subject-ex">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
+                
+                </div>
+
+                <div class="col-5">
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- PARTE DO CADASTRO DO EXERCÍCIO -->
     <section id="exercicios">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h2>
-                    Exercícios
-                    </h2>
-                    <h4>Adicionar exercício:</h4>
+                    
                     <form action="/teacher/exercises/create" method="POST">
-                        <input type="text" name="name" placeholder="Nome" required="required">
+                        <input class="inputNomeMateria" type="text" name="name" placeholder="Nome do exercício" required="required">
+                        <hr class="linha">
                         <br>
                         <br>
                         <select name="subject" id="select-subject"></select>
                         <br>
                         <br>
-                        <textarea name="question" cols="30" rows="5" placeholder="Questão" required="required"></textarea>
-                        <p>
-                            Linguagem : python(única suportada até agora)
-                        </p>
-                        <textarea name="inputs" cols="30" rows="5" placeholder="Inputs (separados por @)"
-                            required="required"></textarea>
-                        <br>
-                        <br>
-                        <textarea name="outputs" cols="30" rows="5" placeholder="Outputs (separados por @)"
-                            required="required"></textarea>
-                        <br>
-                        <button type="submit">Adicionar</button>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <textarea id="describeProblem" name="question" cols="30" rows="5" placeholder="Inserir explicação do problema..." required="required"></textarea>
+                            </div>
+                            
+                            <div class="col-6 alinhandoExerc">
+                                
+                                <div id="textoLinguagem">
+                                    Linguagem : Python (única suportada até agora)
+                                </div>
+                                
+                                <input type="text" placeholder="Número de inputs por teste">
+                                <br>
+                                <input type="text" placeholder="Número de outputs por teste">
+                                <br>
+                                <br>
+                                <textarea name="inputs" cols="30" rows="5" placeholder="Inputs (separados por @)"
+                                    required="required"></textarea>
+                                <br>
+                                <br>
+                                <textarea name="outputs" cols="30" rows="5" placeholder="Outputs (separados por @)"
+                                    required="required"></textarea>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div style="float: right;" class="submitExercicio">
+                            <button type="submit">Adicionar exercício</button>
+                        </div>
+                        
                     </form>
                 </div>
             </div>

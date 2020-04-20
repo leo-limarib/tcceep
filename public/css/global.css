@@ -30,6 +30,12 @@ input:focus {
   outline-offset: 0px;
 }
 
+textarea:focus {
+  outline: thin dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   background: #1e2125;

@@ -64,13 +64,6 @@ input.search {
   border-bottom-right-radius: 3.5em;
 }
 
-/* TABLE STYLE */
-/*
-table thead tr th,
-table tbody tr td {
-  padding: 0.6rem 2.5rem;
-}*/
-
 table{
   background: #424651;
   width: 100%;
