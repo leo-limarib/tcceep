@@ -1,0 +1,105 @@
+.new-button-style {
+  background: #21e6c1;
+  border-radius: 8px;
+  border: 1px solid #21e6c1;
+}
+.new-button-style:hover {
+  background-color: #1cb195;
+  border: 1px solid #1cb195;
+}
+.delete-button {
+  background-color: #f34e4e;
+  border: 1px solid #f34e4e;
+  border-radius: 8px;
+  padding: 0 0.75rem;
+}
+.delete-button:hover {
+  background-color: #c23e3e;
+  border: 1px solid #c23e3e;
+}
+.save-button {
+  background: #f3f37b;
+  border-radius: 8px;
+  border: 1px solid #f3f37b;
+  font-size: 20px;
+  float: right;
+  margin-right: 3rem;
+}
+.save-button:hover {
+  background: #bebe60;
+  border-radius: 8px;
+  border: 1px solid #bebe60;
+}
+
+.table-div {
+  background-color: #21e6c1;
+  border-radius: 16px;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+}
+tr th {
+  color: #071e3d;
+}
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: #292e33;
+}
+tr th,
+tr td {
+  text-align: center;
+}
+
+tbody {
+  background-color: #424651;
+  color: whitesmoke;
+}
+
+.row-selected {
+  background-color: #292e33;
+}
+
+.rightsidehr {
+  border: 1px solid #292e33;
+  width: 80%;
+}
+
+.rightside-info-pad {
+  background-color: #424651;
+  border: 1px solid #424651;
+  border-radius: 16px;
+  width: 80%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.input-title {
+  border: 0px;
+  background-color: #1e2125;
+  font-size: 36px;
+  color: whitesmoke;
+  display: inline-block;
+}
+
+#ex-question {
+  color: white;
+  background-color: #424651;
+  border: 1px solid #424651;
+  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.new-input-style {
+  background: #1e2125;
+  border: 0px;
+  border-bottom: 1px solid #21e6c1;
+  padding: 0.25rem;
+  display: inline-block;
+  color: whitesmoke;
+}

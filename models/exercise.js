@@ -65,6 +65,20 @@ class Exercise {
         });
     });
   }
+
+  static remove(filter) {
+    const db = getDb();
+    return new Promise((resolve, reject) => {
+      db.collection(COLLECTION_NAME)
+        .remove(filter)
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
 }
 
 module.exports = Exercise;

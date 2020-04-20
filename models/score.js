@@ -15,10 +15,10 @@ class Score {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .insertOne(this)
-        .then(result => {
+        .then((result) => {
           resolve(result);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -31,10 +31,10 @@ class Score {
         .find(filter)
         .project(projection)
         .toArray()
-        .then(scores => {
+        .then((scores) => {
           resolve(scores);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -45,10 +45,10 @@ class Score {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .findOne(filter)
-        .then(score => {
+        .then((score) => {
           resolve(score);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -59,10 +59,24 @@ class Score {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .updateOne(filter, update, { upsert: upsert })
-        .then(result => {
+        .then((result) => {
           resolve(result);
         })
-        .catch(err => {
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  static remove(filter) {
+    const db = getDb();
+    return new Promise((resolve, reject) => {
+      db.collection(COLLECTION_NAME)
+        .remove(filter)
+        .then((score) => {
+          resolve(score);
+        })
+        .catch((err) => {
           reject(err);
         });
     });

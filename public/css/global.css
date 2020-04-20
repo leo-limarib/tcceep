@@ -158,3 +158,11 @@ ul a {
 .button-selected {
   color: #21e6c1;
 }
+
+.select-style {
+  padding: 0.35rem;
+  background-color: #21e6c1;
+  border: 1px solid #21e6c1;
+  border-radius: 8px;
+  cursor: pointer;
+}

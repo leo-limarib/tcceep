@@ -69,19 +69,22 @@ function getExercisesScore(exercises, studentEmail) {
 //Por enquanto estamos fixando o problema para ser
 //1 input e 1 output por teste.
 exports.addNewExercise = (req, res) => {
-  const testInputs = req.body.inputs.split("@");
-  const testOutputs = req.body.outputs.split("@");
+  //req.body.name
+  //req.body.subjectId
+  //req.body.question
+  //const testInputs = req.body.inputs.split("@");
+  //const testOutputs = req.body.outputs.split("@");
   const newEx = new Exercise(
     req.session.user["_id"],
-    ObjectID(req.body.subject),
+    ObjectID(req.body.subjectId),
     req.body.name,
     req.body.question,
     ["python3"],
     1,
     1,
     {
-      inputs: testInputs,
-      outputs: testOutputs,
+      inputs: req.body.inputs,
+      outputs: req.body.outputs,
     }
   );
   newEx
@@ -105,16 +108,20 @@ exports.getSubjectExercises = (req, res) => {
     { subjectId: 0, teacherId: 0, testCases: 0 }
   )
     .then((exercises) => {
-      getExercisesScore(exercises, req.session.user["email"])
-        .then((exs) => {
-          return res.send(exs);
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).json({
-            message: "Erro ao tentar retornar exercícios da matéria.",
+      if (exercises.length > 0) {
+        getExercisesScore(exercises, req.session.user["email"])
+          .then((exs) => {
+            return res.send(exs);
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              message: "Erro ao tentar retornar exercícios da matéria.",
+            });
           });
-        });
+      } else {
+        return res.send([]);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -216,4 +223,44 @@ exports.solveExercise = (req, res, next) => {
           .json({ message: "Erro ao tentar resolver exercício." });
       });
   });
+};
+
+exports.getTeacherExercises = (req, res) => {
+  Exercise.find({ teacherId: ObjectID(req.session.user["_id"]) })
+    .then((exercises) => {
+      return res.send(exercises);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar listar exercícios do professor." });
+    });
+};
+
+exports.getExercise = (req, res) => {
+  Exercise.findOne({ _id: ObjectID(req.params.exerciseId) })
+    .then((ex) => {
+      return res.send(ex);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar retornar exercício." });
+    });
+};
+
+exports.removeExercise = (req, res, next) => {
+  // req.params.exerciseId
+  Exercise.remove({ _id: ObjectID(req.params.exerciseId) })
+    .then((result) => {
+      return next(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar excluir exercício." });
+    });
 };

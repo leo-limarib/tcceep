@@ -1,6 +1,7 @@
 const Subject = require("../models/subject");
 const User = require("../models/user");
 const ObjectID = require("mongodb").ObjectID;
+const exercisesController = require("../controllers/exercises");
 
 function subjectInfoFactory(
   name,
@@ -12,7 +13,7 @@ function subjectInfoFactory(
     name: name,
     teacher: teacher,
     registeredStudents: registeredStudents,
-    nonRegisteredStudents: nonRegisteredStudents
+    nonRegisteredStudents: nonRegisteredStudents,
   };
 }
 
@@ -31,10 +32,10 @@ exports.addSubject = (req, res) => {
   );
   subject
     .save()
-    .then(result => {
+    .then((result) => {
       return res.json({ message: "Matéria adicionada com sucesso!" });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -50,17 +51,17 @@ function getSubjectsTeachers(subjects) {
     var newSubjects = [];
     for (const sub of subjects) {
       User.findOne({ _id: ObjectID(sub.teacherId) })
-        .then(t => {
+        .then((t) => {
           newSubjects.push({
             _id: sub._id,
             name: sub.name,
-            teacherName: t.name
+            teacherName: t.name,
           });
           if (newSubjects.length == subjects.length) {
             resolve(newSubjects);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     }
@@ -70,26 +71,26 @@ function getSubjectsTeachers(subjects) {
 exports.getSubjectsFromCampus = (req, res) => {
   Subject.find(
     {
-      campusId: req.session.user["campusId"]
+      campusId: req.session.user["campusId"],
     },
     {
       campusId: 0,
-      studentIds: 0
+      studentIds: 0,
     }
   )
-    .then(subs => {
+    .then((subs) => {
       getSubjectsTeachers(subs)
-        .then(subjects => {
+        .then((subjects) => {
           return res.send(subjects);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar listar matérias do campus." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -104,19 +105,19 @@ req.session.user["campusId"]
 exports.getSubjectInfo = (req, res) => {
   const subjectId = new ObjectID(req.query.subjectId);
   Subject.findOne({ _id: subjectId })
-    .then(sub => {
+    .then((sub) => {
       User.findOne({ _id: sub.teacherId })
-        .then(teacher => {
+        .then((teacher) => {
           //get all students registered in the subject
           User.find({ _id: { $in: sub.studentIds } })
-            .then(registeredStudents => {
+            .then((registeredStudents) => {
               //get all students non registered in the subject
               User.find({
                 _id: { $nin: sub.studentIds },
                 campusId: req.session.user["campusId"],
-                level: 1
+                level: 1,
               })
-                .then(nonRegisteredStudents => {
+                .then((nonRegisteredStudents) => {
                   return res.send(
                     subjectInfoFactory(
                       sub.name,
@@ -126,18 +127,18 @@ exports.getSubjectInfo = (req, res) => {
                     )
                   );
                 })
-                .catch(err => {});
+                .catch((err) => {});
             })
-            .catch(err => {});
+            .catch((err) => {});
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           return res
             .status(500)
             .json({ message: "Erro ao tentar buscar matéria." });
         });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -151,18 +152,18 @@ req.body.studentId
 exports.addStudent = (req, res) => {
   Subject.updateOne(
     {
-      _id: ObjectID(req.params.subjectId)
+      _id: ObjectID(req.params.subjectId),
     },
     {
       $push: {
-        studentIds: ObjectID(req.body.studentId)
-      }
+        studentIds: ObjectID(req.body.studentId),
+      },
     }
   )
     .then(() => {
       return res.json({ message: "Estudande matriculado com sucesso!" });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -173,14 +174,14 @@ exports.addStudent = (req, res) => {
 exports.getTeacherSubjects = (req, res) => {
   Subject.find(
     {
-      teacherId: ObjectID(req.session.user["_id"])
+      teacherId: ObjectID(req.session.user["_id"]),
     },
     { campusId: 0 }
   )
-    .then(subjects => {
+    .then((subjects) => {
       return res.send(subjects);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
@@ -190,13 +191,27 @@ exports.getTeacherSubjects = (req, res) => {
 
 exports.getStudentSubjects = (req, res) => {
   Subject.find({ studentIds: ObjectID(req.session.user["_id"]) })
-    .then(subjects => {
+    .then((subjects) => {
       return res.send(subjects);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res
         .status(500)
         .json({ message: "Erro ao tentar listar matérias do estudante." });
+    });
+};
+
+exports.getSubject = (req, res) => {
+  //req.params.subjectId
+  Subject.findOne({ _id: ObjectID(req.params.subjectId) })
+    .then((subject) => {
+      return res.send(subject);
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar retornar matéria." });
     });
 };
