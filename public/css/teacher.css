@@ -1,7 +1,8 @@
+/*
 #subject-info {
     margin-top: 100px;
     width: 60%;
-}
+}*/
 
 #sub-info-table tbody tr td,
 #sub-info-table thead tr th {
@@ -33,10 +34,6 @@ tbody{
 .subjectStyle:hover{
     background: #1eceae;
 }
-/*
-.subjectStudents{
-
-}*/
 
 #subject-InfoExercises table {
     border-top-right-radius: 2em;
@@ -60,16 +57,201 @@ tbody{
     cursor: pointer;
 }
 
+#subject-InfoExercisesMain table {
+    border-top-right-radius: 2em;
+    border-top-left-radius: 2em;
+    background: #424651;
+    width: 100%;
+}
+  
+#subject-InfoExercisesMain th {
+    background: #21E6C1;
+    color: rgb(57, 58, 58);
+    text-align: center;
+    padding: 10px;
+}
+  
+#subject-InfoExercisesMain tr:hover{
+    background: #2f323a;
+}
+  
+#subject-InfoExercisesMain tbody{
+    cursor: pointer;
+}
+
 td{
-    color: greenyellow;
+    color: white;
     padding: 15px;
 }
 
-#SOTESTE{
-    position: absolute;
-    width: 500px;
-    max-height: 400px;
-    height: 400px;
+td, th{
+    text-align: center;
+}
+
+.centralizar{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.encimaTabela{
+    width: 92%;
+    min-width: 430px;
+}
+
+.borderLeft{
+    border-top-left-radius: 2em;
+}
+  
+.borderRight{
+    border-top-right-radius: 2em;
+}
+
+.scrollTabela{
+    width: 92%;
+    min-width: 426px;
+    max-height: 300px;
     overflow-y: scroll;
+    overflow-x: auto;
+    background: #424651;
+}
+
+.abaixoTabela{ /* width: 491px*/
+    background: #21E6C1;
+    color: #21E6C1;
+    width: 91.8%;
+    height: 20px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    min-width: 426px;
+}
+  
+.abaixoTabelaAluno{ /* width: 491px*/
+    min-width: 416px;
+}
+
+.tituloAlunosMatriculados{
+    margin-top: 50px;
+    font-size: 25px;
+    text-align: center;
+    color: #21E6C1;
+}
+
+.tituloExerciciosMateria{
+    font-size: 25px;
+    text-align: center;
+    color: #21E6C1;
+}
+
+/* PARTE DOS EXERCÍCIOS */
+/************************/
+#exercicios{
+    min-width: 1300px;
+}
+
+.inputNomeMateria{
+    background: none;
+    border: none;
+    font-size: 40px;
+    color: white;
+    width: 400px;
+}
+
+hr.linha{
+    border: 2px solid #292E33;
+    margin: 0;
+}
+
+select {
+    background: #21e6c1;
+    border-radius: 3.5em;
+    padding: 7px 15px;
+    font-size: 22px;
+    margin-top: -30px;
+}
+
+textarea {
+    background: #424651;
+    border-radius: 2em;
+    border: none;
+    padding: 20px;
+    color: white;
+    resize: none;
+}
+
+input {
+    background-color: #1e2125;
+    /*color: #292E33;*/
+    color: white;
+    border: none;
+    border-bottom: 3px solid #21e6c1;
+    padding-top: 15px;
+    font-size: 20px;
+    width: 300px;
+}
+
+input.search {
+    background: #21e6c1;
+    border-top-left-radius: 3.5em;
+    border-bottom-left-radius: 3.5em;
+    padding: 4px 15px;
+    width: 200px;
+    border: none;
+}
+
+.bordaBotaoPesquisa {
+    border: none;
+    border-top-right-radius: 3.5em;
+    border-bottom-right-radius: 3.5em;
+}
+
+.btn-add-exercicio{
+    background: #21e6c1;
+    border: none;
+    border-radius: 1em;
+    font-size: 22px;
+    padding: 7px 13px;
+}
+
+.hoverAdd{
+    float: right;
+    position: relative;
+    bottom: -50px;
+    left: -50px;
+}
+
+.hoverAdd button:hover{
+    background: #248A7A;
+}
+
+#describeProblem{
+    height: 450px;
+    width: 450px;
+}
+
+.submitExercicio {
+    position: relative;
+    top: -640px;
+}
+
+.submitExercicio button{
+    background: #F3F37B;
+    color: #071E3D;
+    padding: 2px 15px;
+    border: none;
+    font-size: 22px;
+    border-radius: 2em;
+}
+
+.submitExercicio button:hover{
+    background: rgb(240, 240, 54);
+}
+
+.alinhandoExerc{
+    position: relative;
+    top: -55px;
+}
+
+#textoLinguagem{
+    margin-bottom: 15px;
 }
 
