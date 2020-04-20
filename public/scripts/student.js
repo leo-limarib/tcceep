@@ -1,8 +1,30 @@
-var exerciseSelected = null;
+function addMenuHoverEffect() {
+  $(".hoverJQuery").hover(
+    () => {
+      $(event.target).addClass("button-hovered");
+      $(event.target).children().addClass("button-hovered");
+    },
+    () => {
+      $(event.target).removeClass("button-hovered");
+      $(event.target).children().removeClass("button-hovered");
+    }
+  );
+}
 
-function showExerciseToSolve(exerciseId) {
-  $("#solve-exercises").empty();
-  exerciseSelected = exerciseId;
+function showSubjectTeacher(teacherId) {
+  $.ajax({
+    type: "GET",
+    url: window.location + `/teacher/${teacherId}`,
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: (info) => {
+      $("#sub-teacher").text(`Prof. ${info.teacher.name}`);
+    },
+  });
+}
+
+function solveExercise(exerciseId) {
   $.ajax({
     type: "GET",
     url: window.location + `/exercises/solve/${exerciseId}`,
@@ -10,25 +32,33 @@ function showExerciseToSolve(exerciseId) {
     data: null,
     dataType: "json",
     success: (exercise) => {
-      $("#solve-exercises").append(
-        `<h2>${exercise.name}</h2><p>${exercise.teacher}</p>` +
-          `<p>${exercise.subject}</p><br>` +
-          `<p>${exercise.question.replace("/\r\n/g", "<br>")}</p>` +
-          `<form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data">` +
-          `<label name="exercise-id" value="${exercise._id}"></label>` +
-          `<select id="language"></select><br><br>` +
-          `<input type="file" name="input_file" placeholder="Código" id="code-input" accept=".py">` +
-          `<button type="submit">Submeter</button></form>`
-      );
-      exercise.languages.forEach((lang) => {
-        $("#language").append(`<option value="${lang}">${lang}</option>`);
-      });
+      console.log(exercise);
+      $(".student-mainboard").empty();
+      $(".student-mainboard")
+        .append(`<div class="row solve-exercise" style="padding: 2rem 3rem;">
+      <div class="col-12">
+          <h3>${exercise.name}</h3>
+          <p>Matéria: ${exercise.subject}</p>
+          <p>Prof. ${exercise.teacher}</p>
+          <hr style="border: 1px solid #292E33;">
+          <form action="/student/exercises/solve/:exerciseId" method="POST">
+              <label name="exercise-id" value="${exercise._id}"></label>
+              <select id="language" class="select-style">
+                  <option value="" selected disabled hidden>Python 3</option>
+              </select>
+              <div class="question-div">${exercise.question}</div>
+              <br>
+              <input type="file" name="input_file" placeholder="Código" id="code-input" accept=".py">
+              <br>
+              <button class="new-button-style" style="margin-top: 1rem;">Submeter código</button>
+          </form>
+      </div>
+  </div>`);
     },
   });
 }
 
 function showSubjectExercises(subjectId) {
-  $("#exercises").empty();
   $.ajax({
     type: "GET",
     url: window.location + `/exercises/${subjectId}`,
@@ -37,73 +67,75 @@ function showSubjectExercises(subjectId) {
     dataType: "json",
     success: (exercises) => {
       exercises.forEach((ex) => {
-        if (ex.score == undefined) {
-          $("#exercises").append(
-            `<div class="exercise-card"><h4>${ex.name}` +
-              `</h4><p>${ex.question}</p>` +
-              `<a onclick="showExerciseToSolve('${ex._id}')" >Resolver exercício</a></div>`
-          );
-        } else {
-          $("#exercises").append(
-            `<div class="exercise-card"><h4>${ex.name}` +
-              `</h4><p>${ex.question}</p>` +
-              `Pontuação: ${ex.score}%<br>` +
-              `<a onclick="showExerciseToSolve('${ex._id}')" >Tentar novamente</a></div>`
-          );
-        }
+        $(".execises-list").append(`<div class="exercise-card">
+        <div style="display; inline-block;">
+            <h3>${ex.name}</h3>
+            <p>Taxa de sucesso: 0%</p>
+        </div>
+        <div style="display: inline-block; margin-top: 0.5rem;">
+            <button class="new-button-style" onclick="solveExercise('${ex._id}')">Resolver</button>
+        </div>
+    </div>`);
       });
     },
   });
 }
 
-function listStudentSubjects() {
+function showSubjectInfo(subjectId) {
   $.ajax({
     type: "GET",
-    url: window.location + `/subjects`,
+    url: window.location + `/subject/${subjectId}`,
+    contentType: "application/json",
+    data: null,
+    dataType: "json",
+    success: (subject) => {
+      $("#sub-name").text(subject.name);
+      showSubjectTeacher(subject.teacherId);
+      showSubjectExercises(subjectId);
+    },
+  });
+}
+
+function showSubjects(subjectId) {
+  $(".student-mainboard").empty();
+  $(".student-mainboard")
+    .append(`<div class="row show-exercises-tab" style="padding: 2rem 3rem;">
+    <div class="col-12">
+        <h3 id="sub-name"></h3>
+        <p id="sub-teacher">Prof. </p>
+    </div>
+    <div class="col-8 execises-list">
+    </div>
+</div>`);
+  showSubjectInfo(subjectId);
+}
+
+function displayExercisesTab() {
+  $(".student-mainboard").empty();
+  $(".student-mainboard")
+    .append(`<div class="row exercises-subjects-list" style="padding: 4rem 12rem;">
+</div>`);
+  $.ajax({
+    type: "GET",
+    url: window.location + `/subjects/`,
     contentType: "application/json",
     data: null,
     dataType: "json",
     success: (subjects) => {
-      $("#student-subjects").append(`<ul id="subjects-list"></ul>`);
       subjects.forEach((sub) => {
-        $("#subjects-list").append(
-          `<li style="cursor: pointer; font-size: 20px;" onclick="showSubjectExercises('${sub._id}')">${sub.name}</li>`
-        );
+        $(".exercises-subjects-list").append(`<div class="col-6">
+          <div class="subject-card">
+              <h3>${sub.name}</h3>
+              <hr style="border: 1px solid #707070;">
+              <p>10 de 12 exercícios resolvidos</p>
+              <button class="new-button-style" onclick="showSubjects('${sub._id}')">Resolver</button>
+          </div>
+      </div>`);
       });
     },
   });
 }
 
 $(document).ready(() => {
-  listStudentSubjects();
+  addMenuHoverEffect();
 });
-
-/* Hover Left Buttons */
-$(document).ready(function () {
-  hiddenForm();
-  $(".hoverJQuery").hover(
-    function () {
-      $(this).css("color", "#21E6C1");
-      $(this).children().css("color", "#21E6C1");
-    },
-    function () {
-      $(this).css("color", "#BFC0C2");
-      $(this).children().css("color", "#258a7a");
-    }
-  );
-});
-
-function hiddenForm() {
-  document.getElementById("provas").style.display = "none";
-  document.getElementById("exercicios").style.display = "none";
-}
-
-function displayProvas() {
-  hiddenForm();
-  document.getElementById("provas").style.display = "block";
-}
-
-function displayExercicios() {
-  hiddenForm();
-  document.getElementById("exercicios").style.display = "block";
-}

@@ -1,10 +1,61 @@
-.exercise-card {
-  padding: 0.5rem;
-  border: 1px solid black;
-  margin: 1rem 0;
-}
-
-.icone-foto-student{
+.icone-foto-student {
   position: relative;
   top: 14px;
+}
+
+.subject-card {
+  width: 75%;
+  padding: 1rem;
+  background-color: #292e33;
+}
+.subject-card h3 {
+  color: #21e6c1;
+}
+.new-button-style {
+  background-color: #292e33;
+  color: #21e6c1;
+  border-radius: 4px;
+  border: 1px solid #21e6c1;
+  padding: 0.25rem;
+}
+.new-button-style:hover {
+  color: #1cb195;
+  border: 1px solid #1cb195;
+}
+
+.show-exercises-tab h3 {
+  color: #21e6c1;
+  margin: 0;
+}
+.show-exercises-tab p {
+  font-size: 18px;
+}
+
+.exercise-card {
+  background-color: #292e33;
+  width: 100%;
+  padding: 0.75rem 1rem;
+}
+.exercise-card p {
+  margin: 0;
+  color: #21e6c1;
+}
+.exercise-card h3 {
+  color: whitesmoke;
+}
+
+.solve-exercise h3 {
+  color: #21e6c1;
+}
+.solve-exercise p {
+  margin: 0;
+}
+
+.question-div {
+  padding: 1rem;
+  background-color: #292e33;
+  color: whitesmoke;
+  width: 60%;
+  margin-top: 1rem;
+  border-radius: 8px;
 }
