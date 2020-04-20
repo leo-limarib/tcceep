@@ -65,6 +65,9 @@ function getExercisesScore(exercises, studentEmail) {
   });
 }
 
+//FIX
+//Por enquanto estamos fixando o problema para ser
+//1 input e 1 output por teste.
 exports.addNewExercise = (req, res) => {
   const testInputs = req.body.inputs.split("@");
   const testOutputs = req.body.outputs.split("@");
@@ -74,6 +77,8 @@ exports.addNewExercise = (req, res) => {
     req.body.name,
     req.body.question,
     ["python3"],
+    1,
+    1,
     {
       inputs: testInputs,
       outputs: testOutputs,
@@ -162,18 +167,22 @@ exports.solveExercise = (req, res, next) => {
           ]);
 
           //Error listener
-          codeProcess.on("error", (err) => {
-            console.log(err);
-            return res
-              .status(500)
-              .json({ message: "Erro ao tentar executar código." });
-          });
+          codeProcess
+            .on("error", (err) => {
+              console.log(err);
+              return res
+                .status(500)
+                .json({ message: "Erro ao tentar executar código." });
+            })
+            .setEncoding("utf-8");
 
           //Stderr listener
-          codeProcess.stderr.on("data", (data) => {
-            console.log(data);
-            return res.status(500).json({ message: data });
-          });
+          codeProcess.stderr
+            .on("data", (data) => {
+              console.log(data);
+              return res.status(500).json({ message: data });
+            })
+            .setEncoding("utf-8");
 
           codeProcess.stdout
             .on("data", (data) => {

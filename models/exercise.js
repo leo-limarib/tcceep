@@ -2,12 +2,23 @@ const getDb = require("../config/database").getDb;
 const COLLECTION_NAME = "exercises";
 
 class Exercise {
-  constructor(teacherId, subjectId, name, question, languages, testCases) {
+  constructor(
+    teacherId,
+    subjectId,
+    name,
+    question,
+    languages,
+    inputSize,
+    outputSize,
+    testCases
+  ) {
     this.teacherId = teacherId;
     this.subjectId = subjectId;
     this.name = name;
     this.question = question;
     this.languages = languages;
+    this.inputSize = inputSize;
+    this.outputSize = outputSize;
     this.testCases = testCases;
   }
 
@@ -16,10 +27,10 @@ class Exercise {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .insertOne(this)
-        .then(result => {
+        .then((result) => {
           resolve(result);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -32,10 +43,10 @@ class Exercise {
         .find(filter)
         .project(projection)
         .toArray()
-        .then(exercises => {
+        .then((exercises) => {
           resolve(exercises);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -46,10 +57,10 @@ class Exercise {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .findOne(filter)
-        .then(exercise => {
+        .then((exercise) => {
           resolve(exercise);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });

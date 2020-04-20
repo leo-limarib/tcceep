@@ -1,4 +1,5 @@
-<!DOCTYPE html="html">
+<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -42,13 +43,16 @@
                 </span>
                 Matérias
             </button>
-            
+
             <button id="bt2" class="hoverJQuery" type="button" onclick="displayExercise()">
                 <span class="icones-menu">
-                    <svg class="svg-inline--fa fa-laptop-code fa-w-20" aria-hidden="true" focusable="false" 
-                    data-prefix="fas" data-icon="laptop-code" role="img" xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" 
-                    d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"></path></svg>
+                    <svg class="svg-inline--fa fa-laptop-code fa-w-20" aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="laptop-code" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z">
+                        </path>
+                    </svg>
                 </span>
                 Exercícios
             </button>
@@ -59,203 +63,19 @@
                 </span>
                 Discussões
             </button>
-            
+
             <br><br>
             <a href="/auth/logout">SAIR</a>
         </div>
     </header>
 
-    <section id="materias">
+    <div class="container-fluid" style="padding: 0;">
+        <div class="row teacher-mainboard">
+            <!-- NEW STUFF -->
 
-        <div class="centralizar"><h2>Matérias</h2></div>
-
-        <div class="container-fluid">
-            <div class="row">
-
-                <div class="col-5">
-                    <div id="subjects">
-                        
-                        <div style="clear: both;"></div>
-                        <table id="subjects-table">
-                            <thead><!--
-                                <tr>
-                                    <th>Nome</th>
-                                </tr>-->
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Parte dos alunos e exercicios matriculados -->
-                <div class="col-7" id="subject-InfoExercises">
-
-                    <!-- PARTE DOS ALUNSO CADASTRADOS NA MATÉRIA -->
-                    <div class="tituloAlunosMatriculados">Alunos matriculados</div>
-
-                    <div class="encimaTabela">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="borderLeft">Nome</th>
-                                    <th class="borderRight">Email</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-                    <div class="scrollTabela">
-                        <table id="subject-info">
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
-
-                    <br>
-
-                    <!-- PARTE DOS EXERCÍCIOS CADASTRADOS NA MATÉRIA -->
-                    <div class="tituloExerciciosMateria">Exercícios</div>
-
-                    <div class="encimaTabela">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="borderLeft">Nome</th>
-                                    <th class="borderRight">Linguagem</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-                    <div class="scrollTabela">
-                        <table id="subject-exercises">
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
-                    <!--
-                    <div id="subject-exercises"></div>-->
-                </div>
-
-            </div>
+            <!-- ######### -->
         </div>
-    </section>
-
-    <section id="exerciciosMain">
-
-        <div class="centralizar"><h2>Exercícios</h2></div>
-
-        <div class=" container-fluid">
-            <div class=" row">
-
-                <div class="col-7" id="subject-InfoExercisesMain">
-                    
-                    <div class="hoverAdd">
-                        <button class="btn-add-exercicio" onclick="displayExerciseAdd()">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-
-                    <div class="hoverAdd mr-3">
-                        <button class="btn-add-exercicio">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
-
-                    <div class="input-group mt-5 mb-4" style="max-width: 300px;">
-                        <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
-                        <div class="input-group-prepend">
-                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1;color: #116e71">
-                                <i class="fas fa-search" style="margin-right: 10px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="encimaTabela">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="borderLeft">Nome</th>
-                                    <th>Matéria</th>
-                                    <th class="borderRight">Linguagem</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-                    <div class="scrollTabela">
-                        <table id="subject-ex">
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="abaixoTabela abaixoTabelaAluno">&nbsp;</div>
-                
-                </div>
-
-                <div class="col-5">
-
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- PARTE DO CADASTRO DO EXERCÍCIO -->
-    <section id="exercicios">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    
-                    <form action="/teacher/exercises/create" method="POST">
-                        <input class="inputNomeMateria" type="text" name="name" placeholder="Nome do exercício" required="required">
-                        <hr class="linha">
-                        <br>
-                        <br>
-                        <select name="subject" id="select-subject"></select>
-                        <br>
-                        <br>
-
-                        <div class="row">
-                            <div class="col-6">
-                                <textarea id="describeProblem" name="question" cols="30" rows="5" placeholder="Inserir explicação do problema..." required="required"></textarea>
-                            </div>
-                            
-                            <div class="col-6 alinhandoExerc">
-                                
-                                <div id="textoLinguagem">
-                                    Linguagem : Python (única suportada até agora)
-                                </div>
-                                
-                                <input type="text" placeholder="Número de inputs por teste">
-                                <br>
-                                <input type="text" placeholder="Número de outputs por teste">
-                                <br>
-                                <br>
-                                <textarea name="inputs" cols="30" rows="5" placeholder="Inputs (separados por @)"
-                                    required="required"></textarea>
-                                <br>
-                                <br>
-                                <textarea name="outputs" cols="30" rows="5" placeholder="Outputs (separados por @)"
-                                    required="required"></textarea>
-                                <br>
-                            </div>
-                        </div>
-                        
-                        <div style="float: right;" class="submitExercicio">
-                            <button type="submit">Adicionar exercício</button>
-                        </div>
-                        
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
+    </div>
     <script src="scripts/teacher.js"></script>
 </body>
 

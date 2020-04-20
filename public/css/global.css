@@ -1,7 +1,7 @@
 button {
   cursor: pointer;
 }
-  
+
 header button {
   display: block;
   border: none;
@@ -76,7 +76,7 @@ h5 {
   margin-left: 10px;
 }
 
-.container-fluid{
+.container-fluid {
   min-width: 1200px;
 }
 
@@ -94,7 +94,8 @@ h5 {
   padding-left: 2px;
 }
 
-.icone-clipboard { /* icone das materias */
+.icone-clipboard {
+  /* icone das materias */
   font-size: 30px;
   padding-left: 9px;
 }
@@ -151,4 +152,9 @@ ul a {
 
 #foto a:hover {
   color: black;
+}
+
+.button-hovered,
+.button-selected {
+  color: #21e6c1;
 }
