@@ -41,4 +41,8 @@ router.get("/exercises/:subjectId", exercisesController.getSubjectExercises);
 router.get("/exercise/score/:exerciseId", scoresController.getExerciseScores);
 // --------- //
 
+// STUDENTS //
+router.get("/student/:studentId", usersController.getStudentInfo);
+// -------- //
+
 module.exports = router;

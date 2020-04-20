@@ -167,8 +167,9 @@ function getExerciseScores(exerciseId) {
     dataType: "json",
     success: (scores) => {
       scores.forEach((score) => {
+        // /student/:studentId
         $("#scores-table tbody").append(
-          `<tr><td>${score.studentId}</td><td>Python 3</td><td>${score.score}</td></tr>`
+          `<tr><td>${score.ownerEmail}</td><td>Python 3</td><td>${score.score}</td></tr>`
         );
       });
     },
