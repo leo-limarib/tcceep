@@ -1,10 +1,37 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #1e2125;
 }
 
-.teacher-signup,
-.student-signup,
-.coordinator-signup {
-    text-align: center;
+.signup-div {
+  text-align: center;
+  width: 25%;
+  margin: 2rem auto;
+  background-color: #424651;
+  padding: 1rem;
+  border-radius: 16px;
+}
+.signup-div h3 {
+  color: #21e6c1;
+}
+input {
+  background-color: #424651;
+  border: 0px;
+  border-bottom: 1px solid #21e6c1;
+  color: whitesmoke;
+  margin: 0.5rem 0;
+}
+
+button {
+  background-color: #21e6c1;
+  border: 1px solid #21e6c1;
+  border-radius: 8px;
+  color: #1e2125;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #1cb195;
+  border: 1px solid #1cb195;
 }

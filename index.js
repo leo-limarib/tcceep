@@ -11,7 +11,7 @@ const authController = require("./controllers/auth");
 
 const store = new MongoDBStore({
   uri: process.env.HOST + process.env.DATABASE_NAME,
-  collection: "sessions"
+  collection: "sessions",
 });
 
 //Set the view engine to use handlebars
@@ -36,7 +36,7 @@ app.use(
     store: store,
     resave: false,
     saveUninitialized: false,
-    unset: "destroy"
+    unset: "destroy",
   })
 );
 
@@ -50,7 +50,20 @@ app.use("/teacher", authController.authTeacher, teacher);
 app.use("/student", authController.authStudent, student);
 
 app.use("/", (req, res) => {
-  return res.render("index", { layout: false, logged: req.session.isLoggedIn });
+  if (req.session.user != undefined) {
+    if (req.session.user.level == 1) {
+      return res.redirect("/student");
+    } else if (req.session.user.level == 2) {
+      return res.redirect("/teacher");
+    } else if (req.session.user.level == 3) {
+      return res.redirect("/coordinator");
+    }
+  } else {
+    return res.render("index", {
+      layout: false,
+      logged: req.session.isLoggedIn,
+    });
+  }
 });
 
 mongoConnect(() => {

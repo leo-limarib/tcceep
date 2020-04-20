@@ -4,7 +4,10 @@ const subjectsController = require("../controllers/subjects");
 const usersController = require("../controllers/users");
 
 router.get("/", (req, res) => {
-  return res.render("coordinator", { layout: false });
+  return res.render("coordinator", {
+    layout: false,
+    name: req.session.user["name"],
+  });
 });
 
 // SUBJECTS //

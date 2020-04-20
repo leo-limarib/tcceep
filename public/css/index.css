@@ -1,0 +1,45 @@
+body {
+  background: #1e2125;
+}
+
+.login-div {
+  padding: 1rem;
+  background-color: #424651;
+  width: 30%;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+.login-div input {
+  margin: 0.5rem 0;
+}
+.login-div h3 {
+  color: #21e6c1;
+}
+
+button {
+  background-color: #21e6c1;
+  border: 1px solid #21e6c1;
+  border-radius: 8px;
+  color: #1e2125;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #1cb195;
+  border: 1px solid #1cb195;
+}
+
+input {
+  background-color: #424651;
+  border: 0px;
+  border-bottom: 1px solid #21e6c1;
+  color: whitesmoke;
+}
+
+a {
+  color: #21e6c1;
+}
+a:hover {
+  color: #1cb195;
+}

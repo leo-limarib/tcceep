@@ -30,7 +30,7 @@
                         </span>
                     </a>
                 </div>
-                <span class="usuario">Nome Ilustrativo joao</span>
+                <span class="usuario">{{name}}</span>
                 <span style="clear: both;" class="facul">FUMEP</span>
 
             </div>
@@ -98,7 +98,8 @@
                     </div>
                     <div class="abaixoTabela">&nbsp;</div>
                     <br>
-                    <br><!--
+                    <br>
+                    <!--
                     <div id="show-subject-info"></div>-->
                 </div>
 
@@ -132,7 +133,8 @@
 
                     <!-- BOTÃO VOLTAR PARA PÁGINA MATÉRIA -->
                     <div class="back">
-                        <button type="button" onclick="backToSubject()"><< Voltar</button>
+                        <button type="button" onclick="backToSubject()">
+                            << Voltar</button>
                     </div>
                     <div style="clear: both;"></div>
 
@@ -144,15 +146,14 @@
                             </span>
                         </button>
                     </div>
-                    
+
                     <div class="tituloAlunos" style="float: right;">Alunos matriculados</div>
 
                     <!-- BOTÃO PESQUISA -->
                     <div class="input-group mt-5 mb-4">
                         <input style="color: black;" class="search" type="text" name="pesquisa" placeholder="Procurar">
                         <div class="input-group-prepend">
-                            <button class="bordaBotaoPesquisa" type="button"
-                                style="background: #21E6C1;color: #116e71">
+                            <button class="bordaBotaoPesquisa" type="button" style="background: #21E6C1;color: #116e71">
                                 <i class="fas fa-search" style="margin-right: 10px;"></i>
                             </button>
                         </div>
@@ -175,18 +176,18 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    
+
                     <div class="abaixoTabela abaixoTabelaProfessor">&nbsp;</div>
                 </div>
 
                 <!-- Parte dos alunos não matriculados -->
                 <div class="col-5 right-div" id="materiaDadosDireita">
-                    
+
                     <!-- Alterar professor da matéria -->
                     <select name="teacherId" class="teacher-select">
-                            <option value="" disabled="disabled" selected="selected">Mudar professor</option>
+                        <option value="" disabled="disabled" selected="selected">Mudar professor</option>
                     </select>
-                    
+
                     <!-- Botão confirmar a troca de professor -->
                     <div class="btn-confirmar-hover" style="float: right;">
                         <button type="button" class="btn-confirmar">
@@ -213,7 +214,7 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                    
+
                     <div class="abaixoTabela abaixoTabelaNaoMatriculado">&nbsp;</div>
 
                     <!-- Botão matricular alunos -->
@@ -222,7 +223,7 @@
                             Matricular alunos
                         </button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

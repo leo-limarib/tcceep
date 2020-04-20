@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <link href="/css/signup.css" rel="stylesheet"/>
-    </head>
-    <body>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="/css/signup.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="signup-div">
+        <h3>Cadastrar coordenador:</h3>
+        <form action="/auth/signup" method="POST">
+            <input type="text" placeholder="Nome" name="name" required><br>
+            <input type="email" placeholder="Email" name="email" required><br>
+            <input type="password" placeholder="Senha" name="password" required><br>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+    <!--
         <div class="container-fluid">
             <div class="row">
                 <h2>Cadastrar coordenador:</h2>
@@ -21,5 +33,7 @@
                 </form>
             </div>
         </div>
-    </body>
+        -->
+</body>
+
 </html>

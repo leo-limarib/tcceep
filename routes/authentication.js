@@ -2,11 +2,13 @@ const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/users");
 
+/*
 router.get("/login", (req, res, next) => {
   if (req.session.isLoggedIn) {
     return res.redirect("/");
   } else return res.render("login", { layout: false });
 });
+*/
 
 router.post("/login", usersController.login);
 
