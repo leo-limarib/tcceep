@@ -6,6 +6,7 @@ const randstr = require("randomstring");
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
+const rimraf = require("rimraf");
 
 exports.checkDuplicate = (req, res, next) => {
   User.findOne({ email: req.body.email })
@@ -367,10 +368,41 @@ exports.getStudentInfo = (req, res) => {
 };
 
 //req.params.studentId
+/*
 exports.deleteStudent = (req, res) => {
   User.remove({ _id: ObjectID(req.params.studentId), level: 1 })
     .then((result) => {
       return res.send({ message: "Aluno excluído com sucesso." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message: "Erro ao tentar excluir aluno selecionado.",
+      });
+    });
+};
+*/
+
+exports.deleteStudent = (req, res) => {
+  User.findOne({ _id: ObjectID(req.params.studentId), level: 1 })
+    .then((student) => {
+      if (student == null) {
+        return res.status(500).json({
+          message: "Erro ao tentar excluir aluno selecionado.",
+        });
+      } else {
+        rimraf(path.join(__dirname, "..", "uploads", student.email), () => {});
+        User.remove({ _id: ObjectID(req.params.studentId), level: 1 })
+          .then((result) => {
+            return res.send({ message: "Aluno excluído com sucesso." });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              message: "Erro ao tentar excluir aluno selecionado.",
+            });
+          });
+      }
     })
     .catch((err) => {
       console.log(err);

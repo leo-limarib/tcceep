@@ -32,7 +32,6 @@ function solveExercise(exerciseId) {
     data: null,
     dataType: "json",
     success: (exercise) => {
-      console.log(exercise);
       $(".student-mainboard").empty();
       $(".student-mainboard")
         .append(`<div class="row solve-exercise" style="padding: 2rem 3rem;">
@@ -41,7 +40,7 @@ function solveExercise(exerciseId) {
           <p>Matéria: ${exercise.subject}</p>
           <p>Prof. ${exercise.teacher}</p>
           <hr style="border: 1px solid #292E33;">
-          <form action="/student/exercises/solve/:exerciseId" method="POST">
+          <form action="/student/exercises/solve/${exerciseId}" method="POST" enctype="multipart/form-data">
               <label name="exercise-id" value="${exercise._id}"></label>
               <select id="language" class="select-style">
                   <option value="" selected disabled hidden>Python 3</option>

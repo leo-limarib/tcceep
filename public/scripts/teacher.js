@@ -244,6 +244,9 @@ function addNewExercise() {
       testCases = { inputs: [], outputs: [] };
       displayExercise();
     },
+    error: (err) => {
+      alert(err.responseJSON.message);
+    },
   });
 }
 
@@ -281,11 +284,11 @@ function showAddExerciseBoard() {
               <option value="" selected disabled hidden>Escolher matéria</option>
           </select>
           <div>
-              <textarea id="ex-question" cols="65" rows="25"
+              <textarea id="ex-question" cols="55" rows="20"
                   placeholder="Inserir explicação do exercício" id="ex-question"></textarea>
           </div>
       </div>
-      <div class="col-6" style="padding-top: 3rem;">
+      <div class="col-5" style="padding-top: 3rem;">
           <p>Linguagem: Python 3</p>
           <div class="table-div" style="margin-bottom: 1rem;">
               <table id="test-cases-table">

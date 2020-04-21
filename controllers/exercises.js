@@ -155,6 +155,7 @@ exports.getExerciseToSolve = (req, res) => {
 
 //req.params.exerciseId
 exports.solveExercise = (req, res, next) => {
+  console.log(req.body);
   upload(req, res, (err) => {
     if (err) {
       return res
@@ -163,6 +164,10 @@ exports.solveExercise = (req, res, next) => {
     }
     Exercise.findOne({ _id: ObjectID(req.params.exerciseId) })
       .then((exercise) => {
+        if (exercise == null) {
+          console.log("Exercicio nao encontrado");
+          return res.status(500).json({ message: "Exercicio nao encontrado" });
+        }
         var score = 0;
         var flaws = [];
         for (var i = 0; i < exercise.testCases.inputs.length; i++) {
@@ -174,22 +179,18 @@ exports.solveExercise = (req, res, next) => {
           ]);
 
           //Error listener
-          codeProcess
-            .on("error", (err) => {
-              console.log(err);
-              return res
-                .status(500)
-                .json({ message: "Erro ao tentar executar código." });
-            })
-            .setEncoding("utf-8");
+          codeProcess.on("error", (err) => {
+            console.log(err);
+            return res
+              .status(500)
+              .json({ message: "Erro ao tentar executar código." });
+          });
 
           //Stderr listener
-          codeProcess.stderr
-            .on("data", (data) => {
-              console.log(data);
-              return res.status(500).json({ message: data });
-            })
-            .setEncoding("utf-8");
+          codeProcess.stderr.on("data", (data) => {
+            console.log(data);
+            return res.status(500).json({ message: data });
+          });
 
           codeProcess.stdout
             .on("data", (data) => {

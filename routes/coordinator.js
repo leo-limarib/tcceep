@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const subjectsController = require("../controllers/subjects");
 const usersController = require("../controllers/users");
+const validationController = require("../controllers/validation");
 
 router.get("/", (req, res) => {
   return res.render("coordinator", {
@@ -13,11 +14,20 @@ router.get("/", (req, res) => {
 // SUBJECTS //
 router.get("/subjects", subjectsController.getSubjectsFromCampus);
 
-router.post("/add-subject", subjectsController.addSubject);
+router.post(
+  "/add-subject",
+  validationController.validateId("teacherId"),
+  subjectsController.addSubject
+);
 
 router.get("/subject/info", subjectsController.getSubjectInfo);
 
-router.post("/add-student/:subjectId", subjectsController.addStudent);
+router.post(
+  "/add-student/:subjectId",
+  validationController.validateId("subjectId"),
+  validationController.validateId("studentId"),
+  subjectsController.addStudent
+);
 // -------- //
 
 // TEACHERS //
@@ -28,6 +38,9 @@ router.get("/teacher/:teacherId", usersController.getTeacherInfo);
 router.post(
   "/add-teacher",
   usersController.checkDuplicate,
+  validationController.validateName("name"),
+  validationController.validatePassword("password", "confPassword"),
+  validationController.validateEmail("email"),
   usersController.createTeacher
 );
 // -------- //
@@ -45,6 +58,9 @@ router.get(
 router.post(
   "/add-student",
   usersController.checkDuplicate,
+  validationController.validateName("name"),
+  validationController.validatePassword("password", "confPassword"),
+  validationController.validateEmail("email"),
   usersController.createStudent
 );
 

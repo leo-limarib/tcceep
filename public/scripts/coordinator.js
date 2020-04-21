@@ -172,6 +172,9 @@ function addTeacher() {
         $("#teacher-conf-password"),
       ]);
     },
+    error: (err) => {
+      alert(err.responseJSON.message);
+    },
   });
   document.getElementById("profSecond").style.display = "none";
 }
@@ -267,6 +270,9 @@ function addStudent() {
         $("#student-password"),
         $("#student-conf-password"),
       ]);
+    },
+    error: (err) => {
+      alert(err.responseJSON.message);
     },
   });
   document.getElementById("alunoSecond").style.display = "none";
