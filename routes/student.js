@@ -17,6 +17,8 @@ router.get("/subject/:subjectId", subjectsController.getSubject);
 
 router.get("/exercises/:subjectId", exercisesController.getSubjectExercises);
 
+router.get("/score/:exerciseId", scoresController.getStudentExerciseScore);
+
 router.get(
   "/exercises/solve/:exerciseId",
   exercisesController.getExerciseToSolve

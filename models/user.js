@@ -15,10 +15,10 @@ class User {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .insertOne(this)
-        .then(result => {
+        .then((result) => {
           resolve(result);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -29,10 +29,10 @@ class User {
     return new Promise((resolve, reject) => {
       db.collection(COLLECTION_NAME)
         .findOne(filter)
-        .then(user => {
+        .then((user) => {
           resolve(user);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -45,10 +45,24 @@ class User {
         .find(filter)
         .project(projection)
         .toArray()
-        .then(users => {
+        .then((users) => {
           resolve(users);
         })
-        .catch(err => {
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  static remove(filter) {
+    const db = getDb();
+    return new Promise((resolve, reject) => {
+      db.collection(COLLECTION_NAME)
+        .remove(filter)
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((err) => {
           reject(err);
         });
     });

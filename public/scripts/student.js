@@ -67,15 +67,25 @@ function showSubjectExercises(subjectId) {
     dataType: "json",
     success: (exercises) => {
       exercises.forEach((ex) => {
-        $(".execises-list").append(`<div class="exercise-card">
-        <div style="display; inline-block;">
-            <h3>${ex.name}</h3>
-            <p>Taxa de sucesso: 0%</p>
-        </div>
-        <div style="display: inline-block; margin-top: 0.5rem;">
-            <button class="new-button-style" onclick="solveExercise('${ex._id}')">Resolver</button>
-        </div>
-    </div>`);
+        $.ajax({
+          type: "GET",
+          url: window.location + `/score/${ex._id}`,
+          contentType: "application/json",
+          data: null,
+          dataType: "json",
+          success: (score) => {
+            $(".execises-list")
+              .append(`<div class="exercise-card" style="margin-top: 1rem;">
+            <div style="display; inline-block;">
+                <h3>${ex.name}</h3>
+                <p>Pontuação: ${score.score}</p>
+            </div>
+            <div style="display: inline-block; margin-top: 0.5rem;">
+                <button class="new-button-style" onclick="solveExercise('${ex._id}')">Resolver</button>
+            </div>
+        </div>`);
+          },
+        });
       });
     },
   });
@@ -122,15 +132,25 @@ function displayExercisesTab() {
     data: null,
     dataType: "json",
     success: (subjects) => {
+      // /exercises/:subjectId
       subjects.forEach((sub) => {
-        $(".exercises-subjects-list").append(`<div class="col-6">
-          <div class="subject-card">
-              <h3>${sub.name}</h3>
-              <hr style="border: 1px solid #707070;">
-              <p>10 de 12 exercícios resolvidos</p>
-              <button class="new-button-style" onclick="showSubjects('${sub._id}')">Resolver</button>
-          </div>
-      </div>`);
+        $.ajax({
+          type: "GET",
+          url: window.location + `/exercises/${sub._id}`,
+          contentType: "application/json",
+          data: null,
+          dataType: "json",
+          success: (exercises) => {
+            $(".exercises-subjects-list").append(`<div class="col-6">
+            <div class="subject-card">
+                <h3>${sub.name}</h3>
+                <hr style="border: 1px solid #707070;">
+                <p>${exercises.length} exercícios disponíveis.</p>
+                <button class="new-button-style" onclick="showSubjects('${sub._id}')">Resolver</button>
+            </div>
+        </div>`);
+          },
+        });
       });
     },
   });

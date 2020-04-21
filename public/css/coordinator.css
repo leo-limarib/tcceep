@@ -3,6 +3,10 @@
   padding: 0.5rem;
 }
 
+.row-selected {
+  background-color: #2f323a;
+}
+
 /* LAYOUT DOS FORMULARIOS */
 
 input {
@@ -16,7 +20,7 @@ input {
   width: 300px;
 }
 
-.marginFormularios button{
+.marginFormularios button {
   margin-top: 10px;
   background: #21e6c1;
   border: none;
@@ -24,11 +28,11 @@ input {
   padding: 5px 15px;
 }
 
-.marginFormularios button:hover{
+.marginFormularios button:hover {
   background: rgb(23, 165, 139);
 }
 
-.marginFormularios{
+.marginFormularios {
   margin-top: 140px;
 }
 
@@ -64,61 +68,63 @@ input.search {
   border-bottom-right-radius: 3.5em;
 }
 
-table{
+table {
   background: #424651;
   width: 100%;
   min-width: 426px;
   text-align: center;
 }
 
-td, th{
+td,
+th {
   text-align: center;
 }
 
-.encimaTabela table{
+.encimaTabela table {
   border-top-right-radius: 2em;
   border-top-left-radius: 2em;
 }
 
-table thead tr th{
+table thead tr th {
   padding: 5px 10px;
 }
 
-table tbody tr td{
+table tbody tr td {
   padding: 10px 0px 10px 20px;
   max-width: 50px;
 }
 
-th{
-  background: #21E6C1;
+th {
+  background: #21e6c1;
   color: rgb(57, 58, 58);
   text-align: center;
 }
 
-tr:hover{
+tr:hover {
   background: #2f323a;
 }
 
-tbody{
+tbody {
   cursor: pointer;
 }
 
-.borderLeft{
+.borderLeft {
   border-top-left-radius: 2em;
 }
 
-.borderRight{
+.borderRight {
   border-top-right-radius: 2em;
 }
 
-.encimaTabela{
+.encimaTabela {
   width: 92%;
   min-width: 430px;
 }
 
-.abaixoTabela{ /* width: 491px*/
-  background: #21E6C1;
-  color: #21E6C1;
+.abaixoTabela {
+  /* width: 491px*/
+  background: #21e6c1;
+  color: #21e6c1;
   width: 92%;
   height: 20px;
   border-bottom-left-radius: 2em;
@@ -126,24 +132,25 @@ tbody{
   min-width: 426px;
 }
 
-.abaixoTabelaProfessor{ /* width: 491px*/
+.abaixoTabelaProfessor {
+  /* width: 491px*/
   min-width: 416px;
 }
 
-.abaixoTabelaAluno{
+.abaixoTabelaAluno {
   min-width: 435px;
 }
 
-.abaixoTabelaNaoMatriculado{
+.abaixoTabelaNaoMatriculado {
   min-width: 425px;
 }
 
-.encimaTabelaMatriculados{
+.encimaTabelaMatriculados {
   min-width: 425px;
 }
 
 /* Button Add Above Table*/
-.btn-add{
+.btn-add {
   background: #21e6c1;
   border: none;
   border-radius: 1em;
@@ -154,13 +161,13 @@ tbody{
   left: -50px;
 }
 
-#teste button:hover{
+#teste button:hover {
   background: #1bbb9e;
 }
 
 /* Button Remove Above Table*/
-.btn-trash{
-  background: #F34E4E;
+.btn-trash {
+  background: #f34e4e;
   border: none;
   border-radius: 1em;
   font-size: 22px;
@@ -170,12 +177,12 @@ tbody{
   bottom: -50px;
 }
 
-.btn-trash-hover button:hover{
+.btn-trash-hover button:hover {
   background: rgb(156, 50, 50);
 }
 
 /* Botão confirmar troca de professor da matéria */
-.btn-confirmar{
+.btn-confirmar {
   background: none;
   border: none;
   color: #21e6c1;
@@ -185,12 +192,12 @@ tbody{
   top: 2px;
 }
 
-.btn-confirmar-hover button:hover{
+.btn-confirmar-hover button:hover {
   color: #169981;
 }
 
 /* Botão matricular alunos na matéria */
-.btn-matricularAlunos{
+.btn-matricularAlunos {
   background: #21e6c1;
   font-size: 20px;
   border: none;
@@ -199,12 +206,12 @@ tbody{
   border-radius: 2em;
 }
 
-.btn-matricularAlunosHover button:hover{
+.btn-matricularAlunosHover button:hover {
   background: #169981;
 }
 
 /**/
-.tituloAlunos{
+.tituloAlunos {
   color: #21e6c1;
   font-size: 20px;
   position: relative;
@@ -212,15 +219,15 @@ tbody{
   right: 100px;
 }
 
-.input-group{
+.input-group {
   max-width: 280px;
 }
 
-#alunos{
+#alunos {
   margin-top: -40px;
 }
 
-.scrollTabela{
+.scrollTabela {
   width: 92%;
   min-width: 426px;
   max-height: 300px;
@@ -229,30 +236,33 @@ tbody{
   background: #424651;
 }
 
-.testeBtnSelected{
+.testeBtnSelected {
   color: yellow;
 }
 
-.back button{
+.back button {
   background: none;
   border: none;
   color: #21e6c1;
 }
 
-.back button:hover{
+.back button:hover {
   color: #16917a;
 }
 
-#materiaDados{
+#materiaDados {
   min-width: 1270px;
 }
 
-#materiaDadosDireita{
+#materiaDadosDireita {
   margin-top: 100px;
 }
 
-#nomeDaMateria{
+#nomeDaMateria {
   margin: 0 auto;
   text-align: center;
 }
 
+.button-selected {
+  color: #21e6c1 !important;
+}

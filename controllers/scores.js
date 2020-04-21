@@ -65,3 +65,25 @@ exports.deleteExerciseScores = (req, res) => {
         .json({ message: "Erro ao tentar excluir pontuações do exercício." });
     });
 };
+
+//req.params.exerciseId
+//req.params.ownerEmail
+exports.getStudentExerciseScore = (req, res) => {
+  Score.findOne({
+    exerciseId: ObjectID(req.params.exerciseId),
+    ownerEmail: req.session.user["email"],
+  })
+    .then((score) => {
+      if (score == null) {
+        return res.send({ score: "Você ainda não resolveu esse exercício." });
+      } else {
+        return res.send(score);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: "Erro ao tentar retornar pontuação do aluno." });
+    });
+};

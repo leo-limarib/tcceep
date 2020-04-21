@@ -365,3 +365,31 @@ exports.getStudentInfo = (req, res) => {
       });
     });
 };
+
+//req.params.studentId
+exports.deleteStudent = (req, res) => {
+  User.remove({ _id: ObjectID(req.params.studentId), level: 1 })
+    .then((result) => {
+      return res.send({ message: "Aluno excluído com sucesso." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message: "Erro ao tentar excluir aluno selecionado.",
+      });
+    });
+};
+
+//req.params.teacherId
+exports.deleteTeacher = (req, res) => {
+  User.remove({ _id: ObjectID(req.params.teacherId), level: 2 })
+    .then((result) => {
+      return res.send({ message: "Professor excluído com sucesso." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        message: "Erro ao tentar excluir professor selecionado.",
+      });
+    });
+};

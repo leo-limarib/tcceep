@@ -47,6 +47,10 @@ router.post(
   usersController.checkDuplicate,
   usersController.createStudent
 );
+
+router.post("/delete-student/:studentId", usersController.deleteStudent);
+
+router.post("/delete-teacher/:teacherId", usersController.deleteTeacher);
 // -------- //
 
 module.exports = router;

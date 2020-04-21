@@ -183,12 +183,11 @@
                 <!-- Parte dos alunos não matriculados -->
                 <div class="col-5 right-div" id="materiaDadosDireita">
 
-                    <!-- Alterar professor da matéria -->
+                    <!--
                     <select name="teacherId" class="teacher-select">
                         <option value="" disabled="disabled" selected="selected">Mudar professor</option>
                     </select>
 
-                    <!-- Botão confirmar a troca de professor -->
                     <div class="btn-confirmar-hover" style="float: right;">
                         <button type="button" class="btn-confirmar">
                             <span>
@@ -196,6 +195,7 @@
                             </span>
                         </button>
                     </div>
+                    -->
 
                     <!-- Tabela alunos não matriculados na matéria -->
                     <div class="encimaTabela encimaTabelaMatriculados">
@@ -219,7 +219,7 @@
 
                     <!-- Botão matricular alunos -->
                     <div class="btn-matricularAlunosHover d-flex justify-content-center">
-                        <button type="button" class="btn-matricularAlunos">
+                        <button type="button" class="btn-matricularAlunos" onclick="matricularAlunos()">
                             Matricular alunos
                         </button>
                     </div>
@@ -246,7 +246,7 @@
                     </div>
 
                     <div class="btn-trash-hover" style="float: right;">
-                        <button class="btn-trash" type="button">
+                        <button class="btn-trash" type="button" onclick="deleteTeacher()">
                             <span>
                                 <i class="fas fa-trash"></i>
                             </span>
@@ -317,7 +317,7 @@
                     </div>
 
                     <div class="btn-trash-hover" style="float: right;">
-                        <button class="btn-trash" type="button">
+                        <button class="btn-trash" type="button" onclick="deleteStudent()">
                             <span>
                                 <i class="fas fa-trash"></i>
                             </span>
