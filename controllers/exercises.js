@@ -174,16 +174,13 @@ exports.solveExercise = (req, res, next) => {
           let index = i;
 
           //Creates the code process
-          const codeProcess = spawn(`python3`, [
+          const codeProcess = spawn(`python`, [
             `uploads/${req.session.user["email"]}/${req.files["input_file"][0].originalname}`,
           ]);
 
           //Error listener
           codeProcess.on("error", (err) => {
             console.log(err);
-            return res
-              .status(500)
-              .json({ message: "Erro ao tentar executar código." });
           });
 
           //Stderr listener
