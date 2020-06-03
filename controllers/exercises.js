@@ -199,7 +199,7 @@ exports.solveExercise = (req, res, next) => {
               } else {
                 flaws.push(index);
               }
-              if (index == exercise.testCases.outputs.length - 1) {
+              if (score + flaws.length == exercise.testCases.outputs.length) {
                 //Aqui devemos adicionar o score do aluno ou modificá-lo
                 //se ele já existe.
                 res.locals.newScore = {
